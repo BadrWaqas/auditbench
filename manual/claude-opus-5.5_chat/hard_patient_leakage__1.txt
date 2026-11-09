@@ -1,0 +1,13 @@
+**Group leakage.** Scans were split at random, so the same patient can appear in both train and test. The 90% figure is inflated by test scans from patients the model already saw during training.
+
+**Test scans from patients with no training scans:**
+- P66: S004 (0), S012 (1), S027 (1)
+- P93: S011 (1)
+
+That's 4 scans with 3 correct, which gives **75.00%**.
+
+The other 6 test scans come from patients who also have training scans: P62, P52, P76, P85 and P89. The firmware update is a red herring, since the vendor confirmed the images are unaffected.
+
+The fix is to split by patient_id with a grouped split. Even then, 4 scans from 2 new patients is far too few to back a claim about generalisation or a pilot at another hospital.
+
+{"flaw": "group_leakage", "corrected_value": 75.00, "reasoning": "Scans were split randomly, so most test scans come from patients who also appear in training, which inflates accuracy. On the 4 test scans from unseen patients (P66, P93), the model got 3 right, which is 75%."}

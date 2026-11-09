@@ -1,0 +1,10 @@
+The analyst averaged only the 13 funds still open, which leaves out the 7 that closed or merged. Those 7 mostly lost money, so the reported figure is inflated by survivorship bias.
+
+**Corrected average across all 20 funds:**
+- The 13 open funds sum to 1137 (1137 / 13 = 87.46, which matches the write-up).
+- The 7 closed funds sum to -104 (-11 + 1 - 7 - 31 - 46 - 8 - 2).
+- All 20 funds sum to 1137 - 104 = 1033, so the average is 1033 / 20 = **51.65%**.
+
+Ridge's name change doesn't affect anything, since its record is continuous and it's already counted as one of the closed funds. The closed funds are measured over shorter windows, but that's the definition the question specifies.
+
+{"flaw": "survivorship_bias", "corrected_value": 51.65, "reasoning": "The average uses only the 13 surviving funds and drops the 7 closed or merged funds, which had mostly negative returns. Including all 20 launched funds gives 1033/20 = 51.65%."}

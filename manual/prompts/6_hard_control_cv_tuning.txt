@@ -1,0 +1,35 @@
+You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.
+Read the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main
+conclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.
+
+Rules:
+- You have no tools and cannot run code. Work the arithmetic out yourself.
+- "flaw" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none
+- Use "none" if the analysis is sound. In that case "corrected_value" is the analyst's reported figure, unchanged.
+- "corrected_value" is a single number (no units, no % sign), defined at the end of the scenario.
+- Finish your reply with ONE JSON object and nothing after it, in exactly this form:
+{"flaw": "<one label>", "corrected_value": <number>, "reasoning": "<one or two sentences>"}
+
+=== SCENARIO ===
+A team tuned a gradient-boosting classifier. They split the data once into a training set (8,000 rows) and a held-out test set (2,000 rows). All 12 configurations below were compared using 5-fold cross-validation INSIDE the training set only. The test set was locked away and was not looked at during tuning. The test set was labelled by a different annotation team, using the same guidelines.
+
+config,mean_5fold_cv_accuracy_on_train_pct
+lr0.30_depth3,84.62
+lr0.30_depth6,85.16
+lr0.30_depth9,83.31
+lr0.10_depth3,84.87
+lr0.10_depth6,82.31
+lr0.10_depth9,82.41
+lr0.05_depth3,81.25
+lr0.05_depth6,86.59
+lr0.05_depth9,82.50
+lr0.01_depth3,82.32
+lr0.01_depth6,85.87
+lr0.01_depth9,82.54
+
+Analyst's write-up:
+I picked the configuration with the best cross-validation score (lr0.05_depth6), retrained it on the full training set, and evaluated it exactly once on the held-out test set: 86.55% accuracy. That is our reported performance estimate.
+
+=== WHAT corrected_value MEANS ===
+The final test accuracy in percent that should be reported. Round to 2 decimals.
+The analyst's reported figure, in the same units, is: 86.55

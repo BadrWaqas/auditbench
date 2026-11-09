@@ -1,0 +1,2342 @@
+{
+  "seed": 20261108,
+  "flaw_labels": [
+    "simpsons_paradox",
+    "preprocessing_leakage",
+    "target_leakage",
+    "imbalanced_accuracy",
+    "base_rate_fallacy",
+    "test_set_tuning",
+    "multiple_comparisons",
+    "none"
+  ],
+  "flaw_labels_hard": [
+    "simpsons_paradox",
+    "preprocessing_leakage",
+    "target_leakage",
+    "group_leakage",
+    "imbalanced_accuracy",
+    "base_rate_fallacy",
+    "test_set_tuning",
+    "multiple_comparisons",
+    "optional_stopping",
+    "regression_to_the_mean",
+    "survivorship_bias",
+    "right_censoring",
+    "none"
+  ],
+  "tasks": [
+    {
+      "id": "simpson_2_strata",
+      "tier": "core",
+      "kind": "stratified_confounding",
+      "difficulty": "medium",
+      "is_control": false,
+      "key": {
+        "flaw": "simpsons_paradox",
+        "value": 3.05,
+        "tol": 0.02
+      },
+      "analyst_value": -16.88,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA physiotherapy clinic compared two rehabilitation programs (P1 and P2) for ankle sprains. Success = back to full activity within 6 weeks. Patients were assigned by their physiotherapist. Data by injury grade:\n\ninjury_grade,group,successes,patients\nmild sprain,P1,300,337\nmild sprain,P2,130,139\nsevere sprain,P1,90,258\nsevere sprain,P2,199,537\n\nAnalyst's write-up:\nPooled over all strata: P1 390/595 = 65.5%, P2 329/676 = 48.7%. P2 minus P1 = -16.88 percentage points, so P1 is better. Recommendation: adopt P1.\n\n=== WHAT corrected_value MEANS ===\nThe standardized difference (P2 minus P1) in success rate, in percentage points: compute each stratum's rate difference (P2 rate minus P1 rate) and weight it by that stratum's share of ALL patients (both groups combined). Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: -16.88\n",
+      "data": {
+        "strata": [
+          "mild sprain",
+          "severe sprain"
+        ],
+        "nA": [
+          337,
+          258
+        ],
+        "sA": [
+          300,
+          90
+        ],
+        "nB": [
+          139,
+          537
+        ],
+        "sB": [
+          130,
+          199
+        ]
+      }
+    },
+    {
+      "id": "simpson_4_strata",
+      "tier": "core",
+      "kind": "stratified_confounding",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "simpsons_paradox",
+        "value": 5.65,
+        "tol": 0.02
+      },
+      "analyst_value": -4.31,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nAn online retailer compared two promotional email versions (E1 and E2). Success = purchase within 7 days. Emails were sent by regional marketing teams who chose the version. Data by customer tier:\n\ncustomer_tier,group,successes,customers\nbronze,E1,2356,2711\nbronze,E2,357,384\nsilver,E1,1650,2624\nsilver,E2,1435,2131\ngold,E1,1396,2340\ngold,E2,1751,2665\nplatinum,E1,93,172\nplatinum,E2,1634,2698\n\nAnalyst's write-up:\nPooled over all strata: E1 5495/7847 = 70.0%, E2 5177/7878 = 65.7%. E2 minus E1 = -4.31 percentage points, so E1 is better. Recommendation: adopt E1.\n\n=== WHAT corrected_value MEANS ===\nThe standardized difference (E2 minus E1) in purchase rate, in percentage points: compute each stratum's rate difference (E2 rate minus E1 rate) and weight it by that stratum's share of ALL customers (both groups combined). Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: -4.31\n",
+      "data": {
+        "strata": [
+          "bronze",
+          "silver",
+          "gold",
+          "platinum"
+        ],
+        "nA": [
+          2711,
+          2624,
+          2340,
+          172
+        ],
+        "sA": [
+          2356,
+          1650,
+          1396,
+          93
+        ],
+        "nB": [
+          384,
+          2131,
+          2665,
+          2698
+        ],
+        "sB": [
+          357,
+          1435,
+          1751,
+          1634
+        ]
+      }
+    },
+    {
+      "id": "base_rate_double_positive",
+      "tier": "core",
+      "kind": "bayes",
+      "difficulty": "medium",
+      "is_control": false,
+      "key": {
+        "flaw": "base_rate_fallacy",
+        "value": 66.03,
+        "tol": 0.02
+      },
+      "analyst_value": 99.84,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA clinic screens for a rare condition. Known test properties: sensitivity 88.0%, specificity 96.0%. Prevalence in the screened population is 0.4%. A patient from this population is tested twice with two independent repeat tests (errors independent given true status) and is positive both times.\n\nAnalyst's write-up:\nThe chance a healthy person tests positive twice is only (1 - 0.96)^2, so a patient with two positive results has a 99.84% probability of having the condition. We can tell patients they almost certainly have it.\n\n=== WHAT corrected_value MEANS ===\nThe true probability (in percent) that the patient has the condition given both tests were positive. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 99.84\n",
+      "data": {
+        "prev": "1/250",
+        "sens": "22/25",
+        "spec": "24/25"
+      }
+    },
+    {
+      "id": "imbalanced_f1",
+      "tier": "core",
+      "kind": "imbalance",
+      "difficulty": "easy",
+      "is_control": false,
+      "key": {
+        "flaw": "imbalanced_accuracy",
+        "value": 44.72,
+        "tol": 0.02
+      },
+      "analyst_value": 97.78,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA hospital builds a model to flag patients who will develop sepsis. On a held-out set of 8000 patients the confusion matrix (positive = sepsis) is:\n\nTP=72, FP=25, FN=153, TN=7750\n\nAnalyst's write-up:\nAccuracy is 97.78%, which is excellent. The model is ready for deployment.\n\n=== WHAT corrected_value MEANS ===\nThe F1 score of the positive (sepsis) class, in percent. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 97.78\n",
+      "data": {
+        "tp": 72,
+        "fp": 25,
+        "fn": 153,
+        "tn": 7750
+      }
+    },
+    {
+      "id": "multiple_comparisons_bh",
+      "tier": "core",
+      "kind": "fdr",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "multiple_comparisons",
+        "value": 3,
+        "tol": 0.0
+      },
+      "analyst_value": 5,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nAn e-commerce team ran one A/B test of a new homepage and tested 20 metrics (all 20 p-values are listed).\n\nmetric,p_value\nclick_through_rate,0.0008\nadd_to_cart_rate,0.0417\ncheckout_rate,0.6733\nrevenue_per_visitor,0.7158\nbounce_rate,0.1391\nsession_length,0.0045\npages_per_session,0.3214\nreturn_visit_rate,0.4808\nemail_signup_rate,0.9105\nsearch_usage_rate,0.8772\nwishlist_adds,0.7276\ncoupon_use_rate,0.2793\napp_installs,0.4178\ncart_abandonment,0.0019\nreview_submissions,0.2393\nsupport_contacts,0.6128\nshare_clicks,0.0280\nscroll_depth,0.0769\nvideo_plays,0.2277\nnewsletter_opens,0.5767\n\nAnalyst's write-up:\n5 metrics have p < 0.05, so the new homepage significantly improves 5 metrics. Ship it and report all 5 wins.\n\n=== WHAT corrected_value MEANS ===\nThe number of the 20 metrics that remain significant after applying the Benjamini-Hochberg procedure at a false discovery rate of 5% (step-up: find the largest rank k with p_(k) <= k/20 x 0.05, and reject the k smallest p-values).\nThe analyst's reported figure, in the same units, is: 5\n",
+      "data": {
+        "p_x10000": [
+          8,
+          417,
+          6733,
+          7158,
+          1391,
+          45,
+          3214,
+          4808,
+          9105,
+          8772,
+          7276,
+          2793,
+          4178,
+          19,
+          2393,
+          6128,
+          280,
+          769,
+          2277,
+          5767
+        ],
+        "naive": 5,
+        "bonferroni": 2
+      }
+    },
+    {
+      "id": "test_set_tuning",
+      "tier": "core",
+      "kind": "selection",
+      "difficulty": "medium",
+      "is_control": false,
+      "key": {
+        "flaw": "test_set_tuning",
+        "value": 86.75,
+        "tol": 0.02
+      },
+      "analyst_value": 89.88,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA team trained a classifier with 12 hyperparameter configurations. Each was scored on a validation set (800 examples) and on a held-out test set (800 examples).\n\nconfig,val_correct_of_800,test_correct_of_800\nlr0.30_depth3,700,695\nlr0.30_depth6,690,675\nlr0.10_depth3,699,719\nlr0.10_depth6,689,677\nlr0.10_depth9,676,669\nlr0.05_depth3,674,658\nlr0.05_depth6,679,697\nlr0.05_depth9,669,691\nlr0.01_depth3,683,661\nlr0.01_depth6,686,689\nlr0.01_depth9,677,662\nlr0.30_depth9,710,694\n\nAnalyst's write-up:\nI evaluated all 12 configurations and picked the one with the highest test accuracy, lr0.10_depth3. Its test accuracy is 89.88%, which is our final reported performance.\n\n=== WHAT corrected_value MEANS ===\nThe honest estimate of test accuracy, in percent: the test accuracy of the configuration that a correct workflow would select (using validation data only). Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 89.88\n",
+      "data": {
+        "names": [
+          "lr0.30_depth3",
+          "lr0.30_depth6",
+          "lr0.10_depth3",
+          "lr0.10_depth6",
+          "lr0.10_depth9",
+          "lr0.05_depth3",
+          "lr0.05_depth6",
+          "lr0.05_depth9",
+          "lr0.01_depth3",
+          "lr0.01_depth6",
+          "lr0.01_depth9",
+          "lr0.30_depth9"
+        ],
+        "val": [
+          700,
+          690,
+          699,
+          689,
+          676,
+          674,
+          679,
+          669,
+          683,
+          686,
+          677,
+          710
+        ],
+        "test": [
+          695,
+          675,
+          719,
+          677,
+          669,
+          658,
+          697,
+          691,
+          661,
+          689,
+          662,
+          694
+        ],
+        "best_val": 11,
+        "best_test": 2
+      }
+    },
+    {
+      "id": "preprocessing_leakage",
+      "tier": "core",
+      "kind": "leakage",
+      "difficulty": "medium",
+      "is_control": false,
+      "key": {
+        "flaw": "preprocessing_leakage",
+        "value": 43.17,
+        "tol": 0.02
+      },
+      "analyst_value": 44.51,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA bank predicts customer churn. The dataset below is already assigned to a train/test split. 'NA' means income is missing.\n\ncustomer_id,split,income_k_eur,churned\n1,train,34.0,0\n2,test,75.7,1\n3,test,NA,0\n4,train,NA,1\n5,train,38.1,1\n6,test,50.4,0\n7,train,57.2,0\n8,train,18.1,0\n9,test,19.5,1\n10,train,74.2,0\n11,train,18.3,0\n12,test,NA,1\n13,train,41.7,0\n14,train,50.0,1\n15,train,56.9,1\n16,train,NA,1\n\nAnalyst's pipeline write-up:\nStep 1: fill every missing income with the mean of the observed incomes across the whole dataset (44.51). Step 2: standardize income using the same whole-dataset statistics. Step 3: fit the model on the train rows and evaluate on the test rows. Test AUC = 0.93.\n\n=== WHAT corrected_value MEANS ===\nThe income value (in thousands of EUR) that should have been used to fill the missing incomes in a leak-free pipeline: the mean of the observed incomes in the TRAIN rows only. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 44.51\n",
+      "data": {
+        "income": [
+          34.0,
+          75.7,
+          50.5,
+          57.6,
+          38.1,
+          50.4,
+          57.2,
+          18.1,
+          19.5,
+          74.2,
+          18.3,
+          82.9,
+          41.7,
+          50.0,
+          56.9,
+          73.0
+        ],
+        "split": [
+          "train",
+          "test",
+          "test",
+          "train",
+          "train",
+          "test",
+          "train",
+          "train",
+          "test",
+          "train",
+          "train",
+          "test",
+          "train",
+          "train",
+          "train",
+          "train"
+        ],
+        "missing": [
+          2,
+          3,
+          11,
+          15
+        ]
+      }
+    },
+    {
+      "id": "target_leakage_timing",
+      "tier": "core",
+      "kind": "leakage",
+      "difficulty": "medium",
+      "is_control": false,
+      "key": {
+        "flaw": "target_leakage",
+        "value": 5,
+        "tol": 0.0
+      },
+      "analyst_value": 8,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA SaaS company predicts which new customers will cancel within 90 days of signup. The model scores each customer on day 14 after signup, so only information recorded on or before day 14 is available at scoring time.\n\nfeature,first_recorded_on_day_relative_to_signup\nsignup_channel,0\ndays_active_first_30d,30\nrefund_issued,52\nfinal_invoice_paid,88\ncountry,0\nfirst_week_logins,7\nsupport_tickets_first_14d,14\ndevice_type,0\n\nAnalyst's write-up:\nI trained gradient boosting on all 8 features above and got test AUC 0.99. This is a very strong model. Deploy it.\n\n=== WHAT corrected_value MEANS ===\nThe number of the listed features that can legitimately be used at scoring time (recorded on or before day 14). Give a count.\nThe analyst's reported figure, in the same units, is: 8\n",
+      "data": {
+        "features": [
+          [
+            "signup_channel",
+            0
+          ],
+          [
+            "days_active_first_30d",
+            30
+          ],
+          [
+            "refund_issued",
+            52
+          ],
+          [
+            "final_invoice_paid",
+            88
+          ],
+          [
+            "country",
+            0
+          ],
+          [
+            "first_week_logins",
+            7
+          ],
+          [
+            "support_tickets_first_14d",
+            14
+          ],
+          [
+            "device_type",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "id": "control_balanced_ab",
+      "tier": "core",
+      "kind": "control",
+      "difficulty": "control",
+      "is_control": true,
+      "key": {
+        "flaw": "none",
+        "value": 1.06,
+        "tol": 0.02
+      },
+      "analyst_value": 1.06,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nAn online shop A/B-tested a new checkout page (B) against the old one (A). Users were randomized to A or B with equal allocation within each device type.\n\ndevice,group,conversions,users\nmobile,A,57,1001\nmobile,B,68,1001\ndesktop,A,92,1161\ndesktop,B,104,1161\n\nAnalyst's write-up:\nPooled: A 149/2162 = 6.89%, B 172/2162 = 7.96%. B minus A = +1.06 percentage points. The difference has the same sign on mobile and on desktop. Roll out B.\n\n=== WHAT corrected_value MEANS ===\nThe standardized difference (B minus A) in conversion rate, in percentage points: compute each device's rate difference (B rate minus A rate) and weight it by that device's share of ALL users (both groups combined). Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 1.06\n",
+      "data": {
+        "n": [
+          1001,
+          1161
+        ],
+        "cA": [
+          57,
+          92
+        ],
+        "cB": [
+          68,
+          104
+        ]
+      }
+    },
+    {
+      "id": "control_legit_lagged_features",
+      "tier": "core",
+      "kind": "control",
+      "difficulty": "control",
+      "is_control": true,
+      "key": {
+        "flaw": "none",
+        "value": 8,
+        "tol": 0.0
+      },
+      "analyst_value": 8,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis.\nRead the scenario below. Decide whether the analysis contains a methodological flaw, and compute the corrected number.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA SaaS company predicts which new customers will cancel within 90 days of signup. The model scores each customer on day 14 after signup, so only information recorded on or before day 14 is available at scoring time.\n\nfeature,first_recorded_on_day_relative_to_signup\ntrial_logins_first_week,7\ndays_since_last_support_ticket_at_signup,0\nchargeback_history_flag,-120\nprevious_subscription_cancelled,-200\nrefund_count_prior_year,-90\nplan_type,0\ncountry,0\nonboarding_completed,10\n\nAnalyst's write-up:\nI trained gradient boosting on all 8 features above and got test AUC 0.76. That is a modest but useful lift over the current heuristic. Proceed to a pilot.\n\n=== WHAT corrected_value MEANS ===\nThe number of the listed features that can legitimately be used at scoring time (recorded on or before day 14). Give a count.\nThe analyst's reported figure, in the same units, is: 8\n",
+      "data": {
+        "features": [
+          [
+            "trial_logins_first_week",
+            7
+          ],
+          [
+            "days_since_last_support_ticket_at_signup",
+            0
+          ],
+          [
+            "chargeback_history_flag",
+            -120
+          ],
+          [
+            "previous_subscription_cancelled",
+            -200
+          ],
+          [
+            "refund_count_prior_year",
+            -90
+          ],
+          [
+            "plan_type",
+            0
+          ],
+          [
+            "country",
+            0
+          ],
+          [
+            "onboarding_completed",
+            10
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hard_cohort_censoring",
+      "tier": "hard",
+      "kind": "censoring",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "right_censoring",
+        "value": 35.64,
+        "tol": 0.02
+      },
+      "analyst_value": 24.87,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA subscription app reports day-30 retention by weekly signup cohort. The table was exported from the product dashboard on 2026-03-01. The dashboard counts a user as retained_day30 if the user was active on day 30 after their own signup date; any user who has not been active on day 30 is counted as not retained. Note: the cohort starting 2025-12-22 includes the Christmas holidays, so signups are lower than usual (this is expected seasonality).\n\ncohort_start,cohort_end,signups,retained_day30\n2025-12-01,2025-12-07,474,149\n2025-12-08,2025-12-14,528,190\n2025-12-15,2025-12-21,597,203\n2025-12-22,2025-12-28,384,146\n2025-12-29,2026-01-04,428,167\n2026-01-05,2026-01-11,485,169\n2026-01-12,2026-01-18,570,221\n2026-01-19,2026-01-25,462,155\n2026-01-26,2026-02-01,534,143\n2026-02-02,2026-02-08,462,0\n2026-02-09,2026-02-15,584,0\n2026-02-16,2026-02-22,696,0\n\nAnalyst's write-up:\nOverall day-30 retention is 24.87% across all 12 cohorts, and the 4 most recent cohorts are down to 6.3%. Retention is collapsing; we need an emergency retention project.\n\n=== WHAT corrected_value MEANS ===\nPooled day-30 retention in percent, computed only over cohorts in which EVERY user has had a full 30 days by the export date (cohort_end + 30 days <= export date): total retained_day30 divided by total signups across those cohorts. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 24.87\n",
+      "data": {
+        "rows": [
+          [
+            "2025-12-01",
+            "2025-12-07",
+            474,
+            149
+          ],
+          [
+            "2025-12-08",
+            "2025-12-14",
+            528,
+            190
+          ],
+          [
+            "2025-12-15",
+            "2025-12-21",
+            597,
+            203
+          ],
+          [
+            "2025-12-22",
+            "2025-12-28",
+            384,
+            146
+          ],
+          [
+            "2025-12-29",
+            "2026-01-04",
+            428,
+            167
+          ],
+          [
+            "2026-01-05",
+            "2026-01-11",
+            485,
+            169
+          ],
+          [
+            "2026-01-12",
+            "2026-01-18",
+            570,
+            221
+          ],
+          [
+            "2026-01-19",
+            "2026-01-25",
+            462,
+            155
+          ],
+          [
+            "2026-01-26",
+            "2026-02-01",
+            534,
+            143
+          ],
+          [
+            "2026-02-02",
+            "2026-02-08",
+            462,
+            0
+          ],
+          [
+            "2026-02-09",
+            "2026-02-15",
+            584,
+            0
+          ],
+          [
+            "2026-02-16",
+            "2026-02-22",
+            696,
+            0
+          ]
+        ],
+        "analysis": "2026-03-01",
+        "n_mature": 8
+      }
+    },
+    {
+      "id": "hard_regression_to_mean",
+      "tier": "hard",
+      "kind": "rtm",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "regression_to_the_mean",
+        "value": 1.7,
+        "tol": 0.02
+      },
+      "analyst_value": 13.3,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA company has 80 sales reps. After Q1, it took the 20 reps with the LOWEST Q1 deal counts and randomly assigned 10 of them to a new coaching program; the other 10 were put on a waitlist and received no coaching until after Q2. Rep R137's Q1 number was entered a day late, but it was verified as correct.\n\nrep_id,group,q1_deals,q2_deals\nR106,coached,63,83\nR112,waitlist,55,66\nR118,waitlist,65,80\nR121,coached,56,65\nR123,waitlist,57,71\nR124,waitlist,58,64\nR125,waitlist,52,57\nR133,coached,55,63\nR139,waitlist,73,90\nR141,coached,72,86\nR143,waitlist,63,73\nR145,coached,65,72\nR146,coached,60,76\nR159,coached,52,68\nR160,coached,53,62\nR162,coached,58,74\nR169,coached,72,90\nR173,waitlist,55,65\nR175,waitlist,73,88\nR179,waitlist,61,74\n\nAnalyst's write-up:\nCoached reps went from an average of 60.6 deals in Q1 to 73.9 in Q2, an improvement of 13.3 deals per rep. The coaching program clearly works and should be rolled out to all 80 reps.\n\n=== WHAT corrected_value MEANS ===\nThe estimated effect of coaching in deals per rep: the mean Q1-to-Q2 change of the coached reps minus the mean Q1-to-Q2 change of the waitlisted reps. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 13.3\n",
+      "data": {
+        "rows": [
+          [
+            "R106",
+            "coached",
+            63,
+            83
+          ],
+          [
+            "R112",
+            "waitlist",
+            55,
+            66
+          ],
+          [
+            "R118",
+            "waitlist",
+            65,
+            80
+          ],
+          [
+            "R121",
+            "coached",
+            56,
+            65
+          ],
+          [
+            "R123",
+            "waitlist",
+            57,
+            71
+          ],
+          [
+            "R124",
+            "waitlist",
+            58,
+            64
+          ],
+          [
+            "R125",
+            "waitlist",
+            52,
+            57
+          ],
+          [
+            "R133",
+            "coached",
+            55,
+            63
+          ],
+          [
+            "R139",
+            "waitlist",
+            73,
+            90
+          ],
+          [
+            "R141",
+            "coached",
+            72,
+            86
+          ],
+          [
+            "R143",
+            "waitlist",
+            63,
+            73
+          ],
+          [
+            "R145",
+            "coached",
+            65,
+            72
+          ],
+          [
+            "R146",
+            "coached",
+            60,
+            76
+          ],
+          [
+            "R159",
+            "coached",
+            52,
+            68
+          ],
+          [
+            "R160",
+            "coached",
+            53,
+            62
+          ],
+          [
+            "R162",
+            "coached",
+            58,
+            74
+          ],
+          [
+            "R169",
+            "coached",
+            72,
+            90
+          ],
+          [
+            "R173",
+            "waitlist",
+            55,
+            65
+          ],
+          [
+            "R175",
+            "waitlist",
+            73,
+            88
+          ],
+          [
+            "R179",
+            "waitlist",
+            61,
+            74
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hard_patient_leakage",
+      "tier": "hard",
+      "kind": "leakage",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "group_leakage",
+        "value": 75.0,
+        "tol": 0.02
+      },
+      "analyst_value": 90.0,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA hospital trains an image classifier on chest scans. Some patients have several scans. The team randomly assigned each SCAN to train or test. model_correct is 1 if the final model classified that test scan correctly (train rows show '-'). The scanner firmware was updated halfway through data collection; the vendor confirmed images are unaffected.\n\nscan_id,patient_id,split,model_correct\nS001,P53,train,-\nS002,P52,train,-\nS003,P49,train,-\nS004,P66,test,0\nS005,P54,train,-\nS006,P76,train,-\nS007,P89,train,-\nS008,P49,train,-\nS009,P89,train,-\nS010,P52,train,-\nS011,P93,test,1\nS012,P66,test,1\nS013,P44,train,-\nS014,P85,train,-\nS015,P85,train,-\nS016,P62,test,1\nS017,P53,train,-\nS018,P52,test,1\nS019,P76,train,-\nS020,P49,train,-\nS021,P89,train,-\nS022,P54,train,-\nS023,P62,test,1\nS024,P76,test,1\nS025,P85,test,1\nS026,P89,train,-\nS027,P66,test,1\nS028,P89,test,1\nS029,P85,train,-\nS030,P55,train,-\nS031,P62,train,-\nS032,P55,train,-\n\nAnalyst's write-up:\nTest accuracy is 90.0% on 10 held-out scans. The model generalises well to new patients and is ready for a pilot in another hospital.\n\n=== WHAT corrected_value MEANS ===\nAccuracy in percent on the test scans from patients who have NO scan in the training set (an estimate of performance on genuinely new patients). Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 90.0\n",
+      "data": {
+        "rows": [
+          [
+            "S001",
+            "P53",
+            "train",
+            "-"
+          ],
+          [
+            "S002",
+            "P52",
+            "train",
+            "-"
+          ],
+          [
+            "S003",
+            "P49",
+            "train",
+            "-"
+          ],
+          [
+            "S004",
+            "P66",
+            "test",
+            0
+          ],
+          [
+            "S005",
+            "P54",
+            "train",
+            "-"
+          ],
+          [
+            "S006",
+            "P76",
+            "train",
+            "-"
+          ],
+          [
+            "S007",
+            "P89",
+            "train",
+            "-"
+          ],
+          [
+            "S008",
+            "P49",
+            "train",
+            "-"
+          ],
+          [
+            "S009",
+            "P89",
+            "train",
+            "-"
+          ],
+          [
+            "S010",
+            "P52",
+            "train",
+            "-"
+          ],
+          [
+            "S011",
+            "P93",
+            "test",
+            1
+          ],
+          [
+            "S012",
+            "P66",
+            "test",
+            1
+          ],
+          [
+            "S013",
+            "P44",
+            "train",
+            "-"
+          ],
+          [
+            "S014",
+            "P85",
+            "train",
+            "-"
+          ],
+          [
+            "S015",
+            "P85",
+            "train",
+            "-"
+          ],
+          [
+            "S016",
+            "P62",
+            "test",
+            1
+          ],
+          [
+            "S017",
+            "P53",
+            "train",
+            "-"
+          ],
+          [
+            "S018",
+            "P52",
+            "test",
+            1
+          ],
+          [
+            "S019",
+            "P76",
+            "train",
+            "-"
+          ],
+          [
+            "S020",
+            "P49",
+            "train",
+            "-"
+          ],
+          [
+            "S021",
+            "P89",
+            "train",
+            "-"
+          ],
+          [
+            "S022",
+            "P54",
+            "train",
+            "-"
+          ],
+          [
+            "S023",
+            "P62",
+            "test",
+            1
+          ],
+          [
+            "S024",
+            "P76",
+            "test",
+            1
+          ],
+          [
+            "S025",
+            "P85",
+            "test",
+            1
+          ],
+          [
+            "S026",
+            "P89",
+            "train",
+            "-"
+          ],
+          [
+            "S027",
+            "P66",
+            "test",
+            1
+          ],
+          [
+            "S028",
+            "P89",
+            "test",
+            1
+          ],
+          [
+            "S029",
+            "P85",
+            "train",
+            "-"
+          ],
+          [
+            "S030",
+            "P55",
+            "train",
+            "-"
+          ],
+          [
+            "S031",
+            "P62",
+            "train",
+            "-"
+          ],
+          [
+            "S032",
+            "P55",
+            "train",
+            "-"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hard_survivorship",
+      "tier": "hard",
+      "kind": "survivorship",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "survivorship_bias",
+        "value": 51.65,
+        "tol": 0.02
+      },
+      "analyst_value": 87.46,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nAn investment newsletter studies all 20 'Growth' funds that launched in January 2016 in one market. 7 have since been closed or merged into other funds; for those, the cumulative return is measured from launch until the closure date. Ridge Growth Fund changed its name in 2021 (its record is continuous and complete).\n\nfund,status,return_measured_until,cumulative_return_pct\nIris Growth Fund,open,2026-01-01,56\nJuniper Growth Fund,closed,2022-04-01,-11\nVale Growth Fund,open,2026-01-01,66\nUmber Growth Fund,open,2026-01-01,61\nFjord Growth Fund,open,2026-01-01,108\nTidal Growth Fund,closed,2021-09-01,1\nAtlas Growth Fund,closed,2018-09-01,-7\nPioneer Growth Fund,open,2026-01-01,141\nDelta Growth Fund,open,2026-01-01,43\nKestrel Growth Fund,closed,2023-07-01,-31\nEmber Growth Fund,closed,2018-08-01,-46\nCobalt Growth Fund,open,2026-01-01,38\nLumen Growth Fund,open,2026-01-01,114\nRidge Growth Fund,closed,2023-02-01,-8\nMeridian Growth Fund,closed,2022-06-01,-2\nNimbus Growth Fund,open,2026-01-01,122\nHarbor Growth Fund,open,2026-01-01,105\nGranite Growth Fund,open,2026-01-01,138\nQuarry Growth Fund,open,2026-01-01,105\nBirch Growth Fund,open,2026-01-01,40\n\nAnalyst's write-up:\nUsing the funds in our current database (the 13 funds still open), the average 10-year cumulative return of Growth funds launched in 2016 is 87.46%. Readers should expect roughly this from a newly launched Growth fund.\n\n=== WHAT corrected_value MEANS ===\nThe average cumulative return in percent across ALL 20 funds that launched, using each closed fund's return up to its closure. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 87.46\n",
+      "data": {
+        "rows": [
+          [
+            "Iris Growth Fund",
+            "open",
+            "2026-01-01",
+            56
+          ],
+          [
+            "Juniper Growth Fund",
+            "closed",
+            "2022-04-01",
+            -11
+          ],
+          [
+            "Vale Growth Fund",
+            "open",
+            "2026-01-01",
+            66
+          ],
+          [
+            "Umber Growth Fund",
+            "open",
+            "2026-01-01",
+            61
+          ],
+          [
+            "Fjord Growth Fund",
+            "open",
+            "2026-01-01",
+            108
+          ],
+          [
+            "Tidal Growth Fund",
+            "closed",
+            "2021-09-01",
+            1
+          ],
+          [
+            "Atlas Growth Fund",
+            "closed",
+            "2018-09-01",
+            -7
+          ],
+          [
+            "Pioneer Growth Fund",
+            "open",
+            "2026-01-01",
+            141
+          ],
+          [
+            "Delta Growth Fund",
+            "open",
+            "2026-01-01",
+            43
+          ],
+          [
+            "Kestrel Growth Fund",
+            "closed",
+            "2023-07-01",
+            -31
+          ],
+          [
+            "Ember Growth Fund",
+            "closed",
+            "2018-08-01",
+            -46
+          ],
+          [
+            "Cobalt Growth Fund",
+            "open",
+            "2026-01-01",
+            38
+          ],
+          [
+            "Lumen Growth Fund",
+            "open",
+            "2026-01-01",
+            114
+          ],
+          [
+            "Ridge Growth Fund",
+            "closed",
+            "2023-02-01",
+            -8
+          ],
+          [
+            "Meridian Growth Fund",
+            "closed",
+            "2022-06-01",
+            -2
+          ],
+          [
+            "Nimbus Growth Fund",
+            "open",
+            "2026-01-01",
+            122
+          ],
+          [
+            "Harbor Growth Fund",
+            "open",
+            "2026-01-01",
+            105
+          ],
+          [
+            "Granite Growth Fund",
+            "open",
+            "2026-01-01",
+            138
+          ],
+          [
+            "Quarry Growth Fund",
+            "open",
+            "2026-01-01",
+            105
+          ],
+          [
+            "Birch Growth Fund",
+            "open",
+            "2026-01-01",
+            40
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hard_feature_windows",
+      "tier": "hard",
+      "kind": "leakage",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "target_leakage",
+        "value": 8,
+        "tol": 0.0
+      },
+      "analyst_value": 12,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA bank builds a model to predict which customers will default between 2026-02-01 and 2026-03-31. In production the model will score every customer at 00:00 on 2026-02-01, using only data recorded up to and including 2026-01-31. Each feature below is computed from data recorded between window_start and window_end inclusive. The training extract was pulled on 2026-03-31. age_of_account_days starts in 2015 because it uses the account opening date; that is intended.\n\nfeature,window_start,window_end\navg_balance_90d,2025-11-03,2026-01-31\napp_logins_14d,2026-01-18,2026-01-31\nmax_balance_6m,2025-08-01,2026-01-31\nbalance_at_extract,2026-03-31,2026-03-31\nsupport_calls_7d,2026-01-26,2026-02-01\ncollections_contact_flag,2026-02-01,2026-03-31\ncard_spend_trend_q,2025-11-01,2026-01-31\nsalary_deposit_flag_60d,2025-12-03,2026-01-31\nage_of_account_days,2015-03-10,2026-01-31\noverdraft_days_30d,2026-01-17,2026-02-15\nmissed_payments_12m,2025-02-01,2026-01-31\ntxn_count_30d,2026-01-02,2026-01-31\n\nAnalyst's write-up:\nUsing all 12 features, the model reaches AUC 0.97 on a held-out set of customers. We should deploy it for the 2026-02-01 scoring run.\n\n=== WHAT corrected_value MEANS ===\nThe number of the listed features that are actually available at scoring time (window_end on or before 2026-01-31). Give a count.\nThe analyst's reported figure, in the same units, is: 12\n",
+      "data": {
+        "features": [
+          [
+            "avg_balance_90d",
+            "2025-11-03",
+            "2026-01-31"
+          ],
+          [
+            "app_logins_14d",
+            "2026-01-18",
+            "2026-01-31"
+          ],
+          [
+            "max_balance_6m",
+            "2025-08-01",
+            "2026-01-31"
+          ],
+          [
+            "balance_at_extract",
+            "2026-03-31",
+            "2026-03-31"
+          ],
+          [
+            "support_calls_7d",
+            "2026-01-26",
+            "2026-02-01"
+          ],
+          [
+            "collections_contact_flag",
+            "2026-02-01",
+            "2026-03-31"
+          ],
+          [
+            "card_spend_trend_q",
+            "2025-11-01",
+            "2026-01-31"
+          ],
+          [
+            "salary_deposit_flag_60d",
+            "2025-12-03",
+            "2026-01-31"
+          ],
+          [
+            "age_of_account_days",
+            "2015-03-10",
+            "2026-01-31"
+          ],
+          [
+            "overdraft_days_30d",
+            "2026-01-17",
+            "2026-02-15"
+          ],
+          [
+            "missed_payments_12m",
+            "2025-02-01",
+            "2026-01-31"
+          ],
+          [
+            "txn_count_30d",
+            "2026-01-02",
+            "2026-01-31"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hard_control_cv_tuning",
+      "tier": "hard",
+      "kind": "control",
+      "difficulty": "hard",
+      "is_control": true,
+      "key": {
+        "flaw": "none",
+        "value": 86.55,
+        "tol": 0.02
+      },
+      "analyst_value": 86.55,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA team tuned a gradient-boosting classifier. They split the data once into a training set (8,000 rows) and a held-out test set (2,000 rows). All 12 configurations below were compared using 5-fold cross-validation INSIDE the training set only. The test set was locked away and was not looked at during tuning. The test set was labelled by a different annotation team, using the same guidelines.\n\nconfig,mean_5fold_cv_accuracy_on_train_pct\nlr0.30_depth3,84.62\nlr0.30_depth6,85.16\nlr0.30_depth9,83.31\nlr0.10_depth3,84.87\nlr0.10_depth6,82.31\nlr0.10_depth9,82.41\nlr0.05_depth3,81.25\nlr0.05_depth6,86.59\nlr0.05_depth9,82.50\nlr0.01_depth3,82.32\nlr0.01_depth6,85.87\nlr0.01_depth9,82.54\n\nAnalyst's write-up:\nI picked the configuration with the best cross-validation score (lr0.05_depth6), retrained it on the full training set, and evaluated it exactly once on the held-out test set: 86.55% accuracy. That is our reported performance estimate.\n\n=== WHAT corrected_value MEANS ===\nThe final test accuracy in percent that should be reported. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 86.55\n",
+      "data": {
+        "cv_x100": [
+          8462,
+          8516,
+          8331,
+          8487,
+          8231,
+          8241,
+          8125,
+          8659,
+          8250,
+          8232,
+          8587,
+          8254
+        ],
+        "best": 7
+      }
+    },
+    {
+      "id": "hard_patient_leakage_xl",
+      "tier": "hard",
+      "kind": "leakage",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "group_leakage",
+        "value": 55.56,
+        "tol": 0.02
+      },
+      "analyst_value": 86.05,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA hospital trains an image classifier on chest scans from 40 patients; most patients have several scans. The team randomly assigned each SCAN to train or test. model_correct is 1 if the final model classified that test scan correctly (train rows show '-'). Two radiologists labelled the scans; their agreement was checked and is high.\n\nscan_id,patient_id,split,model_correct\nS0001,P361,train,-\nS0002,P157,test,1\nS0003,P729,train,-\nS0004,P448,train,-\nS0005,P766,train,-\nS0006,P434,train,-\nS0007,P664,train,-\nS0008,P877,train,-\nS0009,P599,train,-\nS0010,P215,test,1\nS0011,P729,train,-\nS0012,P823,test,1\nS0013,P361,train,-\nS0014,P766,test,1\nS0015,P865,train,-\nS0016,P766,train,-\nS0017,P863,test,1\nS0018,P215,train,-\nS0019,P664,train,-\nS0020,P163,test,1\nS0021,P977,train,-\nS0022,P894,train,-\nS0023,P744,test,1\nS0024,P720,train,-\nS0025,P561,test,1\nS0026,P865,test,0\nS0027,P904,train,-\nS0028,P741,train,-\nS0029,P599,train,-\nS0030,P215,train,-\nS0031,P904,train,-\nS0032,P624,test,1\nS0033,P924,train,-\nS0034,P908,train,-\nS0035,P720,train,-\nS0036,P720,train,-\nS0037,P865,train,-\nS0038,P831,test,1\nS0039,P744,train,-\nS0040,P863,train,-\nS0041,P741,train,-\nS0042,P531,test,1\nS0043,P863,test,1\nS0044,P531,test,1\nS0045,P226,train,-\nS0046,P531,test,1\nS0047,P683,test,1\nS0048,P924,test,1\nS0049,P606,train,-\nS0050,P908,train,-\nS0051,P894,train,-\nS0052,P664,test,1\nS0053,P924,train,-\nS0054,P226,test,1\nS0055,P977,test,1\nS0056,P977,train,-\nS0057,P877,test,1\nS0058,P215,test,0\nS0059,P557,train,-\nS0060,P561,test,0\nS0061,P163,train,-\nS0062,P949,train,-\nS0063,P908,train,-\nS0064,P823,train,-\nS0065,P157,train,-\nS0066,P606,train,-\nS0067,P729,train,-\nS0068,P666,train,-\nS0069,P606,train,-\nS0070,P831,test,0\nS0071,P497,train,-\nS0072,P904,train,-\nS0073,P823,train,-\nS0074,P664,train,-\nS0075,P894,test,1\nS0076,P651,test,0\nS0077,P232,train,-\nS0078,P651,test,0\nS0079,P557,train,-\nS0080,P157,train,-\nS0081,P531,train,-\nS0082,P877,train,-\nS0083,P606,train,-\nS0084,P384,train,-\nS0085,P215,train,-\nS0086,P624,train,-\nS0087,P232,train,-\nS0088,P589,train,-\nS0089,P624,train,-\nS0090,P729,test,1\nS0091,P729,train,-\nS0092,P361,train,-\nS0093,P949,train,-\nS0094,P904,train,-\nS0095,P741,test,1\nS0096,P589,train,-\nS0097,P606,test,1\nS0098,P904,test,1\nS0099,P863,train,-\nS0100,P666,train,-\nS0101,P614,train,-\nS0102,P720,train,-\nS0103,P683,train,-\nS0104,P561,test,1\nS0105,P361,test,1\nS0106,P614,train,-\nS0107,P863,test,1\nS0108,P497,train,-\nS0109,P682,train,-\nS0110,P741,train,-\nS0111,P683,test,1\nS0112,P823,train,-\nS0113,P729,test,1\nS0114,P683,train,-\nS0115,P904,train,-\nS0116,P683,train,-\nS0117,P614,train,-\nS0118,P823,test,1\nS0119,P664,test,1\nS0120,P606,train,-\nS0121,P215,test,1\nS0122,P886,test,1\nS0123,P682,train,-\nS0124,P157,test,1\nS0125,P682,train,-\nS0126,P720,train,-\nS0127,P894,test,1\nS0128,P863,train,-\nS0129,P720,train,-\nS0130,P561,test,1\n\nAnalyst's write-up:\nTest accuracy is 86.05% on 43 held-out scans. The model generalises well to new patients and is ready for a pilot in another hospital.\n\n=== WHAT corrected_value MEANS ===\nAccuracy in percent on the test scans from patients who have NO scan in the training set (an estimate of performance on genuinely new patients). Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 86.05\n",
+      "data": {
+        "rows": [
+          [
+            "S0001",
+            "P361",
+            "train",
+            "-"
+          ],
+          [
+            "S0002",
+            "P157",
+            "test",
+            1
+          ],
+          [
+            "S0003",
+            "P729",
+            "train",
+            "-"
+          ],
+          [
+            "S0004",
+            "P448",
+            "train",
+            "-"
+          ],
+          [
+            "S0005",
+            "P766",
+            "train",
+            "-"
+          ],
+          [
+            "S0006",
+            "P434",
+            "train",
+            "-"
+          ],
+          [
+            "S0007",
+            "P664",
+            "train",
+            "-"
+          ],
+          [
+            "S0008",
+            "P877",
+            "train",
+            "-"
+          ],
+          [
+            "S0009",
+            "P599",
+            "train",
+            "-"
+          ],
+          [
+            "S0010",
+            "P215",
+            "test",
+            1
+          ],
+          [
+            "S0011",
+            "P729",
+            "train",
+            "-"
+          ],
+          [
+            "S0012",
+            "P823",
+            "test",
+            1
+          ],
+          [
+            "S0013",
+            "P361",
+            "train",
+            "-"
+          ],
+          [
+            "S0014",
+            "P766",
+            "test",
+            1
+          ],
+          [
+            "S0015",
+            "P865",
+            "train",
+            "-"
+          ],
+          [
+            "S0016",
+            "P766",
+            "train",
+            "-"
+          ],
+          [
+            "S0017",
+            "P863",
+            "test",
+            1
+          ],
+          [
+            "S0018",
+            "P215",
+            "train",
+            "-"
+          ],
+          [
+            "S0019",
+            "P664",
+            "train",
+            "-"
+          ],
+          [
+            "S0020",
+            "P163",
+            "test",
+            1
+          ],
+          [
+            "S0021",
+            "P977",
+            "train",
+            "-"
+          ],
+          [
+            "S0022",
+            "P894",
+            "train",
+            "-"
+          ],
+          [
+            "S0023",
+            "P744",
+            "test",
+            1
+          ],
+          [
+            "S0024",
+            "P720",
+            "train",
+            "-"
+          ],
+          [
+            "S0025",
+            "P561",
+            "test",
+            1
+          ],
+          [
+            "S0026",
+            "P865",
+            "test",
+            0
+          ],
+          [
+            "S0027",
+            "P904",
+            "train",
+            "-"
+          ],
+          [
+            "S0028",
+            "P741",
+            "train",
+            "-"
+          ],
+          [
+            "S0029",
+            "P599",
+            "train",
+            "-"
+          ],
+          [
+            "S0030",
+            "P215",
+            "train",
+            "-"
+          ],
+          [
+            "S0031",
+            "P904",
+            "train",
+            "-"
+          ],
+          [
+            "S0032",
+            "P624",
+            "test",
+            1
+          ],
+          [
+            "S0033",
+            "P924",
+            "train",
+            "-"
+          ],
+          [
+            "S0034",
+            "P908",
+            "train",
+            "-"
+          ],
+          [
+            "S0035",
+            "P720",
+            "train",
+            "-"
+          ],
+          [
+            "S0036",
+            "P720",
+            "train",
+            "-"
+          ],
+          [
+            "S0037",
+            "P865",
+            "train",
+            "-"
+          ],
+          [
+            "S0038",
+            "P831",
+            "test",
+            1
+          ],
+          [
+            "S0039",
+            "P744",
+            "train",
+            "-"
+          ],
+          [
+            "S0040",
+            "P863",
+            "train",
+            "-"
+          ],
+          [
+            "S0041",
+            "P741",
+            "train",
+            "-"
+          ],
+          [
+            "S0042",
+            "P531",
+            "test",
+            1
+          ],
+          [
+            "S0043",
+            "P863",
+            "test",
+            1
+          ],
+          [
+            "S0044",
+            "P531",
+            "test",
+            1
+          ],
+          [
+            "S0045",
+            "P226",
+            "train",
+            "-"
+          ],
+          [
+            "S0046",
+            "P531",
+            "test",
+            1
+          ],
+          [
+            "S0047",
+            "P683",
+            "test",
+            1
+          ],
+          [
+            "S0048",
+            "P924",
+            "test",
+            1
+          ],
+          [
+            "S0049",
+            "P606",
+            "train",
+            "-"
+          ],
+          [
+            "S0050",
+            "P908",
+            "train",
+            "-"
+          ],
+          [
+            "S0051",
+            "P894",
+            "train",
+            "-"
+          ],
+          [
+            "S0052",
+            "P664",
+            "test",
+            1
+          ],
+          [
+            "S0053",
+            "P924",
+            "train",
+            "-"
+          ],
+          [
+            "S0054",
+            "P226",
+            "test",
+            1
+          ],
+          [
+            "S0055",
+            "P977",
+            "test",
+            1
+          ],
+          [
+            "S0056",
+            "P977",
+            "train",
+            "-"
+          ],
+          [
+            "S0057",
+            "P877",
+            "test",
+            1
+          ],
+          [
+            "S0058",
+            "P215",
+            "test",
+            0
+          ],
+          [
+            "S0059",
+            "P557",
+            "train",
+            "-"
+          ],
+          [
+            "S0060",
+            "P561",
+            "test",
+            0
+          ],
+          [
+            "S0061",
+            "P163",
+            "train",
+            "-"
+          ],
+          [
+            "S0062",
+            "P949",
+            "train",
+            "-"
+          ],
+          [
+            "S0063",
+            "P908",
+            "train",
+            "-"
+          ],
+          [
+            "S0064",
+            "P823",
+            "train",
+            "-"
+          ],
+          [
+            "S0065",
+            "P157",
+            "train",
+            "-"
+          ],
+          [
+            "S0066",
+            "P606",
+            "train",
+            "-"
+          ],
+          [
+            "S0067",
+            "P729",
+            "train",
+            "-"
+          ],
+          [
+            "S0068",
+            "P666",
+            "train",
+            "-"
+          ],
+          [
+            "S0069",
+            "P606",
+            "train",
+            "-"
+          ],
+          [
+            "S0070",
+            "P831",
+            "test",
+            0
+          ],
+          [
+            "S0071",
+            "P497",
+            "train",
+            "-"
+          ],
+          [
+            "S0072",
+            "P904",
+            "train",
+            "-"
+          ],
+          [
+            "S0073",
+            "P823",
+            "train",
+            "-"
+          ],
+          [
+            "S0074",
+            "P664",
+            "train",
+            "-"
+          ],
+          [
+            "S0075",
+            "P894",
+            "test",
+            1
+          ],
+          [
+            "S0076",
+            "P651",
+            "test",
+            0
+          ],
+          [
+            "S0077",
+            "P232",
+            "train",
+            "-"
+          ],
+          [
+            "S0078",
+            "P651",
+            "test",
+            0
+          ],
+          [
+            "S0079",
+            "P557",
+            "train",
+            "-"
+          ],
+          [
+            "S0080",
+            "P157",
+            "train",
+            "-"
+          ],
+          [
+            "S0081",
+            "P531",
+            "train",
+            "-"
+          ],
+          [
+            "S0082",
+            "P877",
+            "train",
+            "-"
+          ],
+          [
+            "S0083",
+            "P606",
+            "train",
+            "-"
+          ],
+          [
+            "S0084",
+            "P384",
+            "train",
+            "-"
+          ],
+          [
+            "S0085",
+            "P215",
+            "train",
+            "-"
+          ],
+          [
+            "S0086",
+            "P624",
+            "train",
+            "-"
+          ],
+          [
+            "S0087",
+            "P232",
+            "train",
+            "-"
+          ],
+          [
+            "S0088",
+            "P589",
+            "train",
+            "-"
+          ],
+          [
+            "S0089",
+            "P624",
+            "train",
+            "-"
+          ],
+          [
+            "S0090",
+            "P729",
+            "test",
+            1
+          ],
+          [
+            "S0091",
+            "P729",
+            "train",
+            "-"
+          ],
+          [
+            "S0092",
+            "P361",
+            "train",
+            "-"
+          ],
+          [
+            "S0093",
+            "P949",
+            "train",
+            "-"
+          ],
+          [
+            "S0094",
+            "P904",
+            "train",
+            "-"
+          ],
+          [
+            "S0095",
+            "P741",
+            "test",
+            1
+          ],
+          [
+            "S0096",
+            "P589",
+            "train",
+            "-"
+          ],
+          [
+            "S0097",
+            "P606",
+            "test",
+            1
+          ],
+          [
+            "S0098",
+            "P904",
+            "test",
+            1
+          ],
+          [
+            "S0099",
+            "P863",
+            "train",
+            "-"
+          ],
+          [
+            "S0100",
+            "P666",
+            "train",
+            "-"
+          ],
+          [
+            "S0101",
+            "P614",
+            "train",
+            "-"
+          ],
+          [
+            "S0102",
+            "P720",
+            "train",
+            "-"
+          ],
+          [
+            "S0103",
+            "P683",
+            "train",
+            "-"
+          ],
+          [
+            "S0104",
+            "P561",
+            "test",
+            1
+          ],
+          [
+            "S0105",
+            "P361",
+            "test",
+            1
+          ],
+          [
+            "S0106",
+            "P614",
+            "train",
+            "-"
+          ],
+          [
+            "S0107",
+            "P863",
+            "test",
+            1
+          ],
+          [
+            "S0108",
+            "P497",
+            "train",
+            "-"
+          ],
+          [
+            "S0109",
+            "P682",
+            "train",
+            "-"
+          ],
+          [
+            "S0110",
+            "P741",
+            "train",
+            "-"
+          ],
+          [
+            "S0111",
+            "P683",
+            "test",
+            1
+          ],
+          [
+            "S0112",
+            "P823",
+            "train",
+            "-"
+          ],
+          [
+            "S0113",
+            "P729",
+            "test",
+            1
+          ],
+          [
+            "S0114",
+            "P683",
+            "train",
+            "-"
+          ],
+          [
+            "S0115",
+            "P904",
+            "train",
+            "-"
+          ],
+          [
+            "S0116",
+            "P683",
+            "train",
+            "-"
+          ],
+          [
+            "S0117",
+            "P614",
+            "train",
+            "-"
+          ],
+          [
+            "S0118",
+            "P823",
+            "test",
+            1
+          ],
+          [
+            "S0119",
+            "P664",
+            "test",
+            1
+          ],
+          [
+            "S0120",
+            "P606",
+            "train",
+            "-"
+          ],
+          [
+            "S0121",
+            "P215",
+            "test",
+            1
+          ],
+          [
+            "S0122",
+            "P886",
+            "test",
+            1
+          ],
+          [
+            "S0123",
+            "P682",
+            "train",
+            "-"
+          ],
+          [
+            "S0124",
+            "P157",
+            "test",
+            1
+          ],
+          [
+            "S0125",
+            "P682",
+            "train",
+            "-"
+          ],
+          [
+            "S0126",
+            "P720",
+            "train",
+            "-"
+          ],
+          [
+            "S0127",
+            "P894",
+            "test",
+            1
+          ],
+          [
+            "S0128",
+            "P863",
+            "train",
+            "-"
+          ],
+          [
+            "S0129",
+            "P720",
+            "train",
+            "-"
+          ],
+          [
+            "S0130",
+            "P561",
+            "test",
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hard_survivorship_xl",
+      "tier": "hard",
+      "kind": "survivorship",
+      "difficulty": "hard",
+      "is_control": false,
+      "key": {
+        "flaw": "survivorship_bias",
+        "value": 44.95,
+        "tol": 0.02
+      },
+      "analyst_value": 73.29,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA fund-research team studies all 60 'Value' funds that launched in January 2016 in one market. 19 have since been closed or merged into other funds; for those, the cumulative return is measured from launch until the closure date. Fees are already deducted in every number.\n\nfund,status,return_measured_until,cumulative_return_pct\nMarfield Value Fund,open,2026-01-01,21\nKelridge Value Fund,open,2026-01-01,82\nNorridge Value Fund,closed,2023-03-01,9\nUlwick Value Fund,open,2026-01-01,96\nOsmere Value Fund,closed,2019-04-01,-34\nPerfield Value Fund,open,2026-01-01,86\nUlton Value Fund,closed,2021-07-01,-2\nPerdale Value Fund,closed,2021-11-01,-29\nKelwick Value Fund,closed,2018-11-01,-9\nLordale Value Fund,open,2026-01-01,97\nRoswick Value Fund,closed,2021-09-01,8\nPerstone Value Fund,open,2026-01-01,59\nMarwick Value Fund,open,2026-01-01,22\nCorridge Value Fund,open,2026-01-01,81\nFenfield Value Fund,closed,2018-12-01,-46\nHolfield Value Fund,open,2026-01-01,71\nQuinwick Value Fund,open,2026-01-01,58\nOsdale Value Fund,closed,2024-08-01,-17\nElridge Value Fund,open,2026-01-01,117\nQuinmere Value Fund,open,2026-01-01,92\nBramere Value Fund,open,2026-01-01,21\nUlford Value Fund,closed,2021-07-01,-18\nNorstone Value Fund,open,2026-01-01,76\nVenton Value Fund,open,2026-01-01,108\nCordale Value Fund,open,2026-01-01,76\nGarfield Value Fund,closed,2021-10-01,-19\nRosridge Value Fund,open,2026-01-01,72\nMarford Value Fund,open,2026-01-01,32\nJorford Value Fund,open,2026-01-01,49\nHolton Value Fund,closed,2024-03-01,-17\nFendale Value Fund,open,2026-01-01,113\nElford Value Fund,closed,2017-05-01,-35\nOsstone Value Fund,closed,2023-10-01,-51\nFenford Value Fund,open,2026-01-01,104\nVenridge Value Fund,open,2026-01-01,67\nNorford Value Fund,open,2026-01-01,102\nNordale Value Fund,closed,2018-05-01,12\nRosdale Value Fund,open,2026-01-01,31\nAlfield Value Fund,closed,2021-06-01,-7\nBrafield Value Fund,open,2026-01-01,80\nKelton Value Fund,open,2026-01-01,118\nFenmere Value Fund,open,2026-01-01,70\nDunwick Value Fund,open,2026-01-01,103\nRosfield Value Fund,open,2026-01-01,26\nHolridge Value Fund,open,2026-01-01,87\nDunridge Value Fund,open,2026-01-01,73\nYardale Value Fund,open,2026-01-01,88\nMarmere Value Fund,closed,2021-09-01,-31\nVenfield Value Fund,closed,2017-05-01,-32\nTorton Value Fund,open,2026-01-01,40\nQuindale Value Fund,open,2026-01-01,95\nElmere Value Fund,closed,2020-02-01,3\nOsfield Value Fund,open,2026-01-01,84\nVenstone Value Fund,open,2026-01-01,27\nJorwick Value Fund,open,2026-01-01,108\nAlstone Value Fund,open,2026-01-01,42\nYarmere Value Fund,open,2026-01-01,62\nOswick Value Fund,open,2026-01-01,96\nSelford Value Fund,open,2026-01-01,73\nLorton Value Fund,closed,2017-10-01,7\n\nAnalyst's write-up:\nUsing the funds in our current database (the 41 funds still open), the average 10-year cumulative return of Value funds launched in 2016 is 73.29%. Investors should expect roughly this from a newly launched Value fund.\n\n=== WHAT corrected_value MEANS ===\nThe average cumulative return in percent across ALL 60 funds that launched, using each closed fund's return up to its closure. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 73.29\n",
+      "data": {
+        "rows": [
+          [
+            "Marfield Value Fund",
+            "open",
+            "2026-01-01",
+            21
+          ],
+          [
+            "Kelridge Value Fund",
+            "open",
+            "2026-01-01",
+            82
+          ],
+          [
+            "Norridge Value Fund",
+            "closed",
+            "2023-03-01",
+            9
+          ],
+          [
+            "Ulwick Value Fund",
+            "open",
+            "2026-01-01",
+            96
+          ],
+          [
+            "Osmere Value Fund",
+            "closed",
+            "2019-04-01",
+            -34
+          ],
+          [
+            "Perfield Value Fund",
+            "open",
+            "2026-01-01",
+            86
+          ],
+          [
+            "Ulton Value Fund",
+            "closed",
+            "2021-07-01",
+            -2
+          ],
+          [
+            "Perdale Value Fund",
+            "closed",
+            "2021-11-01",
+            -29
+          ],
+          [
+            "Kelwick Value Fund",
+            "closed",
+            "2018-11-01",
+            -9
+          ],
+          [
+            "Lordale Value Fund",
+            "open",
+            "2026-01-01",
+            97
+          ],
+          [
+            "Roswick Value Fund",
+            "closed",
+            "2021-09-01",
+            8
+          ],
+          [
+            "Perstone Value Fund",
+            "open",
+            "2026-01-01",
+            59
+          ],
+          [
+            "Marwick Value Fund",
+            "open",
+            "2026-01-01",
+            22
+          ],
+          [
+            "Corridge Value Fund",
+            "open",
+            "2026-01-01",
+            81
+          ],
+          [
+            "Fenfield Value Fund",
+            "closed",
+            "2018-12-01",
+            -46
+          ],
+          [
+            "Holfield Value Fund",
+            "open",
+            "2026-01-01",
+            71
+          ],
+          [
+            "Quinwick Value Fund",
+            "open",
+            "2026-01-01",
+            58
+          ],
+          [
+            "Osdale Value Fund",
+            "closed",
+            "2024-08-01",
+            -17
+          ],
+          [
+            "Elridge Value Fund",
+            "open",
+            "2026-01-01",
+            117
+          ],
+          [
+            "Quinmere Value Fund",
+            "open",
+            "2026-01-01",
+            92
+          ],
+          [
+            "Bramere Value Fund",
+            "open",
+            "2026-01-01",
+            21
+          ],
+          [
+            "Ulford Value Fund",
+            "closed",
+            "2021-07-01",
+            -18
+          ],
+          [
+            "Norstone Value Fund",
+            "open",
+            "2026-01-01",
+            76
+          ],
+          [
+            "Venton Value Fund",
+            "open",
+            "2026-01-01",
+            108
+          ],
+          [
+            "Cordale Value Fund",
+            "open",
+            "2026-01-01",
+            76
+          ],
+          [
+            "Garfield Value Fund",
+            "closed",
+            "2021-10-01",
+            -19
+          ],
+          [
+            "Rosridge Value Fund",
+            "open",
+            "2026-01-01",
+            72
+          ],
+          [
+            "Marford Value Fund",
+            "open",
+            "2026-01-01",
+            32
+          ],
+          [
+            "Jorford Value Fund",
+            "open",
+            "2026-01-01",
+            49
+          ],
+          [
+            "Holton Value Fund",
+            "closed",
+            "2024-03-01",
+            -17
+          ],
+          [
+            "Fendale Value Fund",
+            "open",
+            "2026-01-01",
+            113
+          ],
+          [
+            "Elford Value Fund",
+            "closed",
+            "2017-05-01",
+            -35
+          ],
+          [
+            "Osstone Value Fund",
+            "closed",
+            "2023-10-01",
+            -51
+          ],
+          [
+            "Fenford Value Fund",
+            "open",
+            "2026-01-01",
+            104
+          ],
+          [
+            "Venridge Value Fund",
+            "open",
+            "2026-01-01",
+            67
+          ],
+          [
+            "Norford Value Fund",
+            "open",
+            "2026-01-01",
+            102
+          ],
+          [
+            "Nordale Value Fund",
+            "closed",
+            "2018-05-01",
+            12
+          ],
+          [
+            "Rosdale Value Fund",
+            "open",
+            "2026-01-01",
+            31
+          ],
+          [
+            "Alfield Value Fund",
+            "closed",
+            "2021-06-01",
+            -7
+          ],
+          [
+            "Brafield Value Fund",
+            "open",
+            "2026-01-01",
+            80
+          ],
+          [
+            "Kelton Value Fund",
+            "open",
+            "2026-01-01",
+            118
+          ],
+          [
+            "Fenmere Value Fund",
+            "open",
+            "2026-01-01",
+            70
+          ],
+          [
+            "Dunwick Value Fund",
+            "open",
+            "2026-01-01",
+            103
+          ],
+          [
+            "Rosfield Value Fund",
+            "open",
+            "2026-01-01",
+            26
+          ],
+          [
+            "Holridge Value Fund",
+            "open",
+            "2026-01-01",
+            87
+          ],
+          [
+            "Dunridge Value Fund",
+            "open",
+            "2026-01-01",
+            73
+          ],
+          [
+            "Yardale Value Fund",
+            "open",
+            "2026-01-01",
+            88
+          ],
+          [
+            "Marmere Value Fund",
+            "closed",
+            "2021-09-01",
+            -31
+          ],
+          [
+            "Venfield Value Fund",
+            "closed",
+            "2017-05-01",
+            -32
+          ],
+          [
+            "Torton Value Fund",
+            "open",
+            "2026-01-01",
+            40
+          ],
+          [
+            "Quindale Value Fund",
+            "open",
+            "2026-01-01",
+            95
+          ],
+          [
+            "Elmere Value Fund",
+            "closed",
+            "2020-02-01",
+            3
+          ],
+          [
+            "Osfield Value Fund",
+            "open",
+            "2026-01-01",
+            84
+          ],
+          [
+            "Venstone Value Fund",
+            "open",
+            "2026-01-01",
+            27
+          ],
+          [
+            "Jorwick Value Fund",
+            "open",
+            "2026-01-01",
+            108
+          ],
+          [
+            "Alstone Value Fund",
+            "open",
+            "2026-01-01",
+            42
+          ],
+          [
+            "Yarmere Value Fund",
+            "open",
+            "2026-01-01",
+            62
+          ],
+          [
+            "Oswick Value Fund",
+            "open",
+            "2026-01-01",
+            96
+          ],
+          [
+            "Selford Value Fund",
+            "open",
+            "2026-01-01",
+            73
+          ],
+          [
+            "Lorton Value Fund",
+            "closed",
+            "2017-10-01",
+            7
+          ]
+        ]
+      }
+    },
+    {
+      "id": "hard_control_post_treatment",
+      "tier": "hard",
+      "kind": "control",
+      "difficulty": "hard",
+      "is_control": true,
+      "key": {
+        "flaw": "none",
+        "value": 10.28,
+        "tol": 0.02
+      },
+      "analyst_value": 10.28,
+      "prompt": "You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.\nRead the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main\nconclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.\n\nRules:\n- You have no tools and cannot run code. Work the arithmetic out yourself.\n- \"flaw\" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none\n- Use \"none\" if the analysis is sound. In that case \"corrected_value\" is the analyst's reported figure, unchanged.\n- \"corrected_value\" is a single number (no units, no % sign), defined at the end of the scenario.\n- Finish your reply with ONE JSON object and nothing after it, in exactly this form:\n{\"flaw\": \"<one label>\", \"corrected_value\": <number>, \"reasoning\": \"<one or two sentences>\"}\n\n=== SCENARIO ===\nA double-blind randomized trial compares a new drug with placebo for patients with hypertensive kidney disease. Patients were randomized at week 0. The drug works partly by lowering blood pressure. At week 4 (after treatment started) each patient's blood pressure was recorded as controlled (yes/no). The primary outcome is recovery at week 12. Randomization was checked and the arms are balanced at baseline.\n\nbp_controlled_at_week4,arm,recovered_at_week12,patients\nyes,drug,295,509\nyes,placebo,101,153\nno,drug,43,186\nno,placebo,151,504\n\nAnalyst's write-up:\nPooling all randomized patients: drug 338/695 = 48.6% recovered, placebo 252/657 = 38.4%. Drug minus placebo = +10.28 percentage points. The drug improves recovery and should go to the regulator.\n\n=== WHAT corrected_value MEANS ===\nThe effect of the drug on week-12 recovery, in percentage points (drug minus placebo), that should be reported as the trial's primary result. Round to 2 decimals.\nThe analyst's reported figure, in the same units, is: 10.28\n",
+      "data": {
+        "rows": [
+          [
+            "yes",
+            "drug",
+            295,
+            509
+          ],
+          [
+            "yes",
+            "placebo",
+            101,
+            153
+          ],
+          [
+            "no",
+            "drug",
+            43,
+            186
+          ],
+          [
+            "no",
+            "placebo",
+            151,
+            504
+          ]
+        ]
+      }
+    }
+  ]
+}

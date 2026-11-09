@@ -1,0 +1,153 @@
+You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.
+Read the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main
+conclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.
+
+Rules:
+- You have no tools and cannot run code. Work the arithmetic out yourself.
+- "flaw" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none
+- Use "none" if the analysis is sound. In that case "corrected_value" is the analyst's reported figure, unchanged.
+- "corrected_value" is a single number (no units, no % sign), defined at the end of the scenario.
+- Finish your reply with ONE JSON object and nothing after it, in exactly this form:
+{"flaw": "<one label>", "corrected_value": <number>, "reasoning": "<one or two sentences>"}
+
+=== SCENARIO ===
+A hospital trains an image classifier on chest scans from 40 patients; most patients have several scans. The team randomly assigned each SCAN to train or test. model_correct is 1 if the final model classified that test scan correctly (train rows show '-'). Two radiologists labelled the scans; their agreement was checked and is high.
+
+scan_id,patient_id,split,model_correct
+S0001,P361,train,-
+S0002,P157,test,1
+S0003,P729,train,-
+S0004,P448,train,-
+S0005,P766,train,-
+S0006,P434,train,-
+S0007,P664,train,-
+S0008,P877,train,-
+S0009,P599,train,-
+S0010,P215,test,1
+S0011,P729,train,-
+S0012,P823,test,1
+S0013,P361,train,-
+S0014,P766,test,1
+S0015,P865,train,-
+S0016,P766,train,-
+S0017,P863,test,1
+S0018,P215,train,-
+S0019,P664,train,-
+S0020,P163,test,1
+S0021,P977,train,-
+S0022,P894,train,-
+S0023,P744,test,1
+S0024,P720,train,-
+S0025,P561,test,1
+S0026,P865,test,0
+S0027,P904,train,-
+S0028,P741,train,-
+S0029,P599,train,-
+S0030,P215,train,-
+S0031,P904,train,-
+S0032,P624,test,1
+S0033,P924,train,-
+S0034,P908,train,-
+S0035,P720,train,-
+S0036,P720,train,-
+S0037,P865,train,-
+S0038,P831,test,1
+S0039,P744,train,-
+S0040,P863,train,-
+S0041,P741,train,-
+S0042,P531,test,1
+S0043,P863,test,1
+S0044,P531,test,1
+S0045,P226,train,-
+S0046,P531,test,1
+S0047,P683,test,1
+S0048,P924,test,1
+S0049,P606,train,-
+S0050,P908,train,-
+S0051,P894,train,-
+S0052,P664,test,1
+S0053,P924,train,-
+S0054,P226,test,1
+S0055,P977,test,1
+S0056,P977,train,-
+S0057,P877,test,1
+S0058,P215,test,0
+S0059,P557,train,-
+S0060,P561,test,0
+S0061,P163,train,-
+S0062,P949,train,-
+S0063,P908,train,-
+S0064,P823,train,-
+S0065,P157,train,-
+S0066,P606,train,-
+S0067,P729,train,-
+S0068,P666,train,-
+S0069,P606,train,-
+S0070,P831,test,0
+S0071,P497,train,-
+S0072,P904,train,-
+S0073,P823,train,-
+S0074,P664,train,-
+S0075,P894,test,1
+S0076,P651,test,0
+S0077,P232,train,-
+S0078,P651,test,0
+S0079,P557,train,-
+S0080,P157,train,-
+S0081,P531,train,-
+S0082,P877,train,-
+S0083,P606,train,-
+S0084,P384,train,-
+S0085,P215,train,-
+S0086,P624,train,-
+S0087,P232,train,-
+S0088,P589,train,-
+S0089,P624,train,-
+S0090,P729,test,1
+S0091,P729,train,-
+S0092,P361,train,-
+S0093,P949,train,-
+S0094,P904,train,-
+S0095,P741,test,1
+S0096,P589,train,-
+S0097,P606,test,1
+S0098,P904,test,1
+S0099,P863,train,-
+S0100,P666,train,-
+S0101,P614,train,-
+S0102,P720,train,-
+S0103,P683,train,-
+S0104,P561,test,1
+S0105,P361,test,1
+S0106,P614,train,-
+S0107,P863,test,1
+S0108,P497,train,-
+S0109,P682,train,-
+S0110,P741,train,-
+S0111,P683,test,1
+S0112,P823,train,-
+S0113,P729,test,1
+S0114,P683,train,-
+S0115,P904,train,-
+S0116,P683,train,-
+S0117,P614,train,-
+S0118,P823,test,1
+S0119,P664,test,1
+S0120,P606,train,-
+S0121,P215,test,1
+S0122,P886,test,1
+S0123,P682,train,-
+S0124,P157,test,1
+S0125,P682,train,-
+S0126,P720,train,-
+S0127,P894,test,1
+S0128,P863,train,-
+S0129,P720,train,-
+S0130,P561,test,1
+
+Analyst's write-up:
+Test accuracy is 86.05% on 43 held-out scans. The model generalises well to new patients and is ready for a pilot in another hospital.
+
+=== WHAT corrected_value MEANS ===
+Accuracy in percent on the test scans from patients who have NO scan in the training set (an estimate of performance on genuinely new patients). Round to 2 decimals.
+The analyst's reported figure, in the same units, is: 86.05

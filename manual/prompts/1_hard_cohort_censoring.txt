@@ -1,0 +1,35 @@
+You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.
+Read the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main
+conclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.
+
+Rules:
+- You have no tools and cannot run code. Work the arithmetic out yourself.
+- "flaw" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none
+- Use "none" if the analysis is sound. In that case "corrected_value" is the analyst's reported figure, unchanged.
+- "corrected_value" is a single number (no units, no % sign), defined at the end of the scenario.
+- Finish your reply with ONE JSON object and nothing after it, in exactly this form:
+{"flaw": "<one label>", "corrected_value": <number>, "reasoning": "<one or two sentences>"}
+
+=== SCENARIO ===
+A subscription app reports day-30 retention by weekly signup cohort. The table was exported from the product dashboard on 2026-03-01. The dashboard counts a user as retained_day30 if the user was active on day 30 after their own signup date; any user who has not been active on day 30 is counted as not retained. Note: the cohort starting 2025-12-22 includes the Christmas holidays, so signups are lower than usual (this is expected seasonality).
+
+cohort_start,cohort_end,signups,retained_day30
+2025-12-01,2025-12-07,474,149
+2025-12-08,2025-12-14,528,190
+2025-12-15,2025-12-21,597,203
+2025-12-22,2025-12-28,384,146
+2025-12-29,2026-01-04,428,167
+2026-01-05,2026-01-11,485,169
+2026-01-12,2026-01-18,570,221
+2026-01-19,2026-01-25,462,155
+2026-01-26,2026-02-01,534,143
+2026-02-02,2026-02-08,462,0
+2026-02-09,2026-02-15,584,0
+2026-02-16,2026-02-22,696,0
+
+Analyst's write-up:
+Overall day-30 retention is 24.87% across all 12 cohorts, and the 4 most recent cohorts are down to 6.3%. Retention is collapsing; we need an emergency retention project.
+
+=== WHAT corrected_value MEANS ===
+Pooled day-30 retention in percent, computed only over cohorts in which EVERY user has had a full 30 days by the export date (cohort_end + 30 days <= export date): total retained_day30 divided by total signups across those cohorts. Round to 2 decimals.
+The analyst's reported figure, in the same units, is: 24.87

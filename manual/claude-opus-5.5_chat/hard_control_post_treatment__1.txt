@@ -1,0 +1,5 @@
+The analysis is sound. Week-4 blood pressure control comes after treatment started and is partly caused by the drug, so it's a mediator, not a confounder. If you stratify on it, the drug looks worse in both groups (yes: 57.96% vs 66.01%; no: 23.12% vs 29.96%). That reversal isn't real. It's collider/mediator bias from conditioning on something randomization doesn't protect. The pooled intention-to-treat comparison of all randomized patients is the correct primary estimate.
+
+Check: 338/695 = 48.63%, 252/657 = 38.36%, difference = +10.28 pp.
+
+{"flaw": "none", "corrected_value": 10.28, "reasoning": "BP control at week 4 is a post-randomization mediator, so the Simpson's-style reversal within its strata is an artifact; the pooled intention-to-treat comparison of randomized arms (48.63% vs 38.36%) is the valid primary result."}

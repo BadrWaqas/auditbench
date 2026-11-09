@@ -1,0 +1,83 @@
+You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.
+Read the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main
+conclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.
+
+Rules:
+- You have no tools and cannot run code. Work the arithmetic out yourself.
+- "flaw" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none
+- Use "none" if the analysis is sound. In that case "corrected_value" is the analyst's reported figure, unchanged.
+- "corrected_value" is a single number (no units, no % sign), defined at the end of the scenario.
+- Finish your reply with ONE JSON object and nothing after it, in exactly this form:
+{"flaw": "<one label>", "corrected_value": <number>, "reasoning": "<one or two sentences>"}
+
+=== SCENARIO ===
+A fund-research team studies all 60 'Value' funds that launched in January 2016 in one market. 19 have since been closed or merged into other funds; for those, the cumulative return is measured from launch until the closure date. Fees are already deducted in every number.
+
+fund,status,return_measured_until,cumulative_return_pct
+Marfield Value Fund,open,2026-01-01,21
+Kelridge Value Fund,open,2026-01-01,82
+Norridge Value Fund,closed,2023-03-01,9
+Ulwick Value Fund,open,2026-01-01,96
+Osmere Value Fund,closed,2019-04-01,-34
+Perfield Value Fund,open,2026-01-01,86
+Ulton Value Fund,closed,2021-07-01,-2
+Perdale Value Fund,closed,2021-11-01,-29
+Kelwick Value Fund,closed,2018-11-01,-9
+Lordale Value Fund,open,2026-01-01,97
+Roswick Value Fund,closed,2021-09-01,8
+Perstone Value Fund,open,2026-01-01,59
+Marwick Value Fund,open,2026-01-01,22
+Corridge Value Fund,open,2026-01-01,81
+Fenfield Value Fund,closed,2018-12-01,-46
+Holfield Value Fund,open,2026-01-01,71
+Quinwick Value Fund,open,2026-01-01,58
+Osdale Value Fund,closed,2024-08-01,-17
+Elridge Value Fund,open,2026-01-01,117
+Quinmere Value Fund,open,2026-01-01,92
+Bramere Value Fund,open,2026-01-01,21
+Ulford Value Fund,closed,2021-07-01,-18
+Norstone Value Fund,open,2026-01-01,76
+Venton Value Fund,open,2026-01-01,108
+Cordale Value Fund,open,2026-01-01,76
+Garfield Value Fund,closed,2021-10-01,-19
+Rosridge Value Fund,open,2026-01-01,72
+Marford Value Fund,open,2026-01-01,32
+Jorford Value Fund,open,2026-01-01,49
+Holton Value Fund,closed,2024-03-01,-17
+Fendale Value Fund,open,2026-01-01,113
+Elford Value Fund,closed,2017-05-01,-35
+Osstone Value Fund,closed,2023-10-01,-51
+Fenford Value Fund,open,2026-01-01,104
+Venridge Value Fund,open,2026-01-01,67
+Norford Value Fund,open,2026-01-01,102
+Nordale Value Fund,closed,2018-05-01,12
+Rosdale Value Fund,open,2026-01-01,31
+Alfield Value Fund,closed,2021-06-01,-7
+Brafield Value Fund,open,2026-01-01,80
+Kelton Value Fund,open,2026-01-01,118
+Fenmere Value Fund,open,2026-01-01,70
+Dunwick Value Fund,open,2026-01-01,103
+Rosfield Value Fund,open,2026-01-01,26
+Holridge Value Fund,open,2026-01-01,87
+Dunridge Value Fund,open,2026-01-01,73
+Yardale Value Fund,open,2026-01-01,88
+Marmere Value Fund,closed,2021-09-01,-31
+Venfield Value Fund,closed,2017-05-01,-32
+Torton Value Fund,open,2026-01-01,40
+Quindale Value Fund,open,2026-01-01,95
+Elmere Value Fund,closed,2020-02-01,3
+Osfield Value Fund,open,2026-01-01,84
+Venstone Value Fund,open,2026-01-01,27
+Jorwick Value Fund,open,2026-01-01,108
+Alstone Value Fund,open,2026-01-01,42
+Yarmere Value Fund,open,2026-01-01,62
+Oswick Value Fund,open,2026-01-01,96
+Selford Value Fund,open,2026-01-01,73
+Lorton Value Fund,closed,2017-10-01,7
+
+Analyst's write-up:
+Using the funds in our current database (the 41 funds still open), the average 10-year cumulative return of Value funds launched in 2016 is 73.29%. Investors should expect roughly this from a newly launched Value fund.
+
+=== WHAT corrected_value MEANS ===
+The average cumulative return in percent across ALL 60 funds that launched, using each closed fund's return up to its closure. Round to 2 decimals.
+The analyst's reported figure, in the same units, is: 73.29

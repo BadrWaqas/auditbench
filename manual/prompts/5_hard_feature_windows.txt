@@ -1,0 +1,35 @@
+You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.
+Read the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main
+conclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.
+
+Rules:
+- You have no tools and cannot run code. Work the arithmetic out yourself.
+- "flaw" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none
+- Use "none" if the analysis is sound. In that case "corrected_value" is the analyst's reported figure, unchanged.
+- "corrected_value" is a single number (no units, no % sign), defined at the end of the scenario.
+- Finish your reply with ONE JSON object and nothing after it, in exactly this form:
+{"flaw": "<one label>", "corrected_value": <number>, "reasoning": "<one or two sentences>"}
+
+=== SCENARIO ===
+A bank builds a model to predict which customers will default between 2026-02-01 and 2026-03-31. In production the model will score every customer at 00:00 on 2026-02-01, using only data recorded up to and including 2026-01-31. Each feature below is computed from data recorded between window_start and window_end inclusive. The training extract was pulled on 2026-03-31. age_of_account_days starts in 2015 because it uses the account opening date; that is intended.
+
+feature,window_start,window_end
+avg_balance_90d,2025-11-03,2026-01-31
+app_logins_14d,2026-01-18,2026-01-31
+max_balance_6m,2025-08-01,2026-01-31
+balance_at_extract,2026-03-31,2026-03-31
+support_calls_7d,2026-01-26,2026-02-01
+collections_contact_flag,2026-02-01,2026-03-31
+card_spend_trend_q,2025-11-01,2026-01-31
+salary_deposit_flag_60d,2025-12-03,2026-01-31
+age_of_account_days,2015-03-10,2026-01-31
+overdraft_days_30d,2026-01-17,2026-02-15
+missed_payments_12m,2025-02-01,2026-01-31
+txn_count_30d,2026-01-02,2026-01-31
+
+Analyst's write-up:
+Using all 12 features, the model reaches AUC 0.97 on a held-out set of customers. We should deploy it for the 2026-02-01 scoring run.
+
+=== WHAT corrected_value MEANS ===
+The number of the listed features that are actually available at scoring time (window_end on or before 2026-01-31). Give a count.
+The analyst's reported figure, in the same units, is: 12

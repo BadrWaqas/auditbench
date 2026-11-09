@@ -1,0 +1,55 @@
+You are a senior data scientist reviewing a colleague's analysis before it goes to leadership.
+Read the scenario below. Decide whether the analysis contains a methodological flaw that invalidates its main
+conclusion, and compute the corrected number. Some details in a scenario may look unusual but be harmless.
+
+Rules:
+- You have no tools and cannot run code. Work the arithmetic out yourself.
+- "flaw" must be exactly one of: simpsons_paradox, preprocessing_leakage, target_leakage, group_leakage, imbalanced_accuracy, base_rate_fallacy, test_set_tuning, multiple_comparisons, optional_stopping, regression_to_the_mean, survivorship_bias, right_censoring, none
+- Use "none" if the analysis is sound. In that case "corrected_value" is the analyst's reported figure, unchanged.
+- "corrected_value" is a single number (no units, no % sign), defined at the end of the scenario.
+- Finish your reply with ONE JSON object and nothing after it, in exactly this form:
+{"flaw": "<one label>", "corrected_value": <number>, "reasoning": "<one or two sentences>"}
+
+=== SCENARIO ===
+A hospital trains an image classifier on chest scans. Some patients have several scans. The team randomly assigned each SCAN to train or test. model_correct is 1 if the final model classified that test scan correctly (train rows show '-'). The scanner firmware was updated halfway through data collection; the vendor confirmed images are unaffected.
+
+scan_id,patient_id,split,model_correct
+S001,P53,train,-
+S002,P52,train,-
+S003,P49,train,-
+S004,P66,test,0
+S005,P54,train,-
+S006,P76,train,-
+S007,P89,train,-
+S008,P49,train,-
+S009,P89,train,-
+S010,P52,train,-
+S011,P93,test,1
+S012,P66,test,1
+S013,P44,train,-
+S014,P85,train,-
+S015,P85,train,-
+S016,P62,test,1
+S017,P53,train,-
+S018,P52,test,1
+S019,P76,train,-
+S020,P49,train,-
+S021,P89,train,-
+S022,P54,train,-
+S023,P62,test,1
+S024,P76,test,1
+S025,P85,test,1
+S026,P89,train,-
+S027,P66,test,1
+S028,P89,test,1
+S029,P85,train,-
+S030,P55,train,-
+S031,P62,train,-
+S032,P55,train,-
+
+Analyst's write-up:
+Test accuracy is 90.0% on 10 held-out scans. The model generalises well to new patients and is ready for a pilot in another hospital.
+
+=== WHAT corrected_value MEANS ===
+Accuracy in percent on the test scans from patients who have NO scan in the training set (an estimate of performance on genuinely new patients). Round to 2 decimals.
+The analyst's reported figure, in the same units, is: 90.0

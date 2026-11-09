@@ -1,0 +1,10 @@
+The analyst averaged only the 41 funds still open. The 19 closed or merged funds were left out, and they are mostly the poor performers. That makes the 73.29% figure too optimistic, which is survivorship bias.
+
+**Working:**
+- Open funds (41): returns sum to 3005, so the average is 73.29 (matches the analyst).
+- Closed funds (19): positives total +39 and negatives total −347, so the net is −308.
+- All 60 funds: 3005 − 308 = 2697, and 2697 / 60 = **44.95**.
+
+The other details are harmless. Measuring closed funds only up to their closure date is how the scenario defines the corrected figure, and fees are already deducted everywhere.
+
+{"flaw": "survivorship_bias", "corrected_value": 44.95, "reasoning": "The average uses only the 41 surviving funds and drops the 19 closed or merged funds, which mostly had negative returns. Including all 60 launched funds gives (3005 - 308) / 60 = 44.95%."}

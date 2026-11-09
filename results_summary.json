@@ -1,0 +1,1922 @@
+{
+ "models": [
+  {
+   "label": "nemotron-3-ultra-550b_openrouter",
+   "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+   "mode": "api",
+   "n": 23,
+   "errors": 0,
+   "pass": "100%",
+   "flaw_acc": "100%",
+   "value_acc": "100%",
+   "false_flag": "0%",
+   "missed": "0%",
+   "core": {
+    "mean": 100.0,
+    "sd": 0.0,
+    "runs": 1,
+    "pass": "100%"
+   },
+   "hard": {
+    "mean": 100.0,
+    "sd": 0.0,
+    "runs": 1,
+    "pass": "100%"
+   }
+  },
+  {
+   "label": "nemotron-3.5-super_openrouter",
+   "model": "nvidia/nemotron-3.5-super-vl:free",
+   "mode": "api",
+   "n": 38,
+   "errors": 0,
+   "pass": "100%",
+   "flaw_acc": "100%",
+   "value_acc": "100%",
+   "false_flag": "0%",
+   "missed": "0%",
+   "core": {
+    "mean": 100.0,
+    "sd": 0.0,
+    "runs": 2,
+    "pass": "100%"
+   },
+   "hard": {
+    "mean": 100.0,
+    "sd": 0.0,
+    "runs": 2,
+    "pass": "100%"
+   }
+  },
+  {
+   "label": "claude-opus-5.5_chat",
+   "model": "claude-opus-5.5_chat",
+   "mode": "manual_chat",
+   "n": 9,
+   "errors": 0,
+   "pass": "100%",
+   "flaw_acc": "100%",
+   "value_acc": "100%",
+   "false_flag": "0%",
+   "missed": "0%",
+   "core": {
+    "mean": null,
+    "sd": null,
+    "runs": 0,
+    "pass": "-"
+   },
+   "hard": {
+    "mean": 100.0,
+    "sd": 0.0,
+    "runs": 1,
+    "pass": "100%"
+   }
+  },
+  {
+   "label": "nemotron-3-nano-30b_openrouter",
+   "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+   "mode": "api",
+   "n": 19,
+   "errors": 0,
+   "pass": "74%",
+   "flaw_acc": "80%",
+   "value_acc": "73%",
+   "false_flag": "0%",
+   "missed": "0%",
+   "core": {
+    "mean": 90.0,
+    "sd": 0.0,
+    "runs": 1,
+    "pass": "90%"
+   },
+   "hard": {
+    "mean": 61.111111111111114,
+    "sd": 0.0,
+    "runs": 1,
+    "pass": "56%"
+   }
+  },
+  {
+   "label": "qwen2.5-7b_ollama-local",
+   "model": "qwen2.5:7b",
+   "mode": "local",
+   "n": 57,
+   "errors": 0,
+   "pass": "18%",
+   "flaw_acc": "49%",
+   "value_acc": "9%",
+   "false_flag": "42%",
+   "missed": "36%",
+   "core": {
+    "mean": 43.333333333333336,
+    "sd": 2.3570226039551585,
+    "runs": 3,
+    "pass": "20%"
+   },
+   "hard": {
+    "mean": 25.925925925925927,
+    "sd": 5.237828008789243,
+    "runs": 3,
+    "pass": "15%"
+   }
+  }
+ ],
+ "per_task": {
+  "nemotron-3-ultra-550b_openrouter": {
+   "simpson_2_strata": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "simpsons_paradox",
+     "value_pred": 3.05,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "simpson_4_strata": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "simpsons_paradox",
+     "value_pred": 5.65,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "base_rate_double_positive": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "base_rate_fallacy",
+     "value_pred": 66.03,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "imbalanced_f1": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "imbalanced_accuracy",
+     "value_pred": 44.72,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "multiple_comparisons_bh": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "multiple_comparisons",
+     "value_pred": 3.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "test_set_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 86.75,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "preprocessing_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 43.17,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "target_leakage_timing": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 5.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "control_balanced_ab": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 1.06,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "control_legit_lagged_features": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_cohort_censoring": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "right_censoring",
+     "value_pred": 35.64,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "right_censoring",
+     "value_pred": 35.64,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_regression_to_mean": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "regression_to_the_mean",
+     "value_pred": 1.7,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 75.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_survivorship": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 51.65,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_feature_windows": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_cv_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.55,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage_xl": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 55.56,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 55.56,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_survivorship_xl": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 44.95,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 44.95,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_post_treatment": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 10.28,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 10.28,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ]
+  },
+  "nemotron-3.5-super_openrouter": {
+   "simpson_2_strata": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "simpsons_paradox",
+     "value_pred": 3.05,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "simpsons_paradox",
+     "value_pred": 3.05,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "simpson_4_strata": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "simpsons_paradox",
+     "value_pred": 5.65,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "simpsons_paradox",
+     "value_pred": 5.65,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "base_rate_double_positive": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "base_rate_fallacy",
+     "value_pred": 66.03,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "base_rate_fallacy",
+     "value_pred": 66.03,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "imbalanced_f1": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "imbalanced_accuracy",
+     "value_pred": 44.72,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "imbalanced_accuracy",
+     "value_pred": 44.72,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "multiple_comparisons_bh": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "multiple_comparisons",
+     "value_pred": 3.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "multiple_comparisons",
+     "value_pred": 3.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "test_set_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 86.75,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 86.75,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "preprocessing_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 43.17,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 43.17,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "target_leakage_timing": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 5.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 5.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "control_balanced_ab": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 1.06,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 1.06,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "control_legit_lagged_features": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_cohort_censoring": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "right_censoring",
+     "value_pred": 35.64,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "right_censoring",
+     "value_pred": 35.64,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_regression_to_mean": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "regression_to_the_mean",
+     "value_pred": 1.7,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "regression_to_the_mean",
+     "value_pred": 1.7,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 75.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 75.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_survivorship": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 51.65,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 51.65,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_feature_windows": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_cv_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.55,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.55,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage_xl": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 55.56,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 55.56,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_survivorship_xl": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 44.95,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 44.95,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_post_treatment": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 10.28,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 10.28,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ]
+  },
+  "claude-opus-5.5_chat": {
+   "simpson_2_strata": [],
+   "simpson_4_strata": [],
+   "base_rate_double_positive": [],
+   "imbalanced_f1": [],
+   "multiple_comparisons_bh": [],
+   "test_set_tuning": [],
+   "preprocessing_leakage": [],
+   "target_leakage_timing": [],
+   "control_balanced_ab": [],
+   "control_legit_lagged_features": [],
+   "hard_cohort_censoring": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "right_censoring",
+     "value_pred": 35.64,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_regression_to_mean": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "regression_to_the_mean",
+     "value_pred": 1.7,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 75.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_survivorship": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 51.65,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_feature_windows": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_cv_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.55,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage_xl": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 55.56,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_survivorship_xl": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 44.95,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_post_treatment": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 10.28,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ]
+  },
+  "nemotron-3-nano-30b_openrouter": {
+   "simpson_2_strata": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "simpsons_paradox",
+     "value_pred": 3.05,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "simpson_4_strata": [
+    {
+     "parse_ok": false,
+     "flaw_pred": null,
+     "value_pred": null,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "base_rate_double_positive": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "base_rate_fallacy",
+     "value_pred": 66.03,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "imbalanced_f1": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "imbalanced_accuracy",
+     "value_pred": 44.72,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "multiple_comparisons_bh": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "multiple_comparisons",
+     "value_pred": 3.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "test_set_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 86.75,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "preprocessing_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 43.17,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "target_leakage_timing": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 5.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "control_balanced_ab": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 1.06,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "control_legit_lagged_features": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_cohort_censoring": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "right_censoring",
+     "value_pred": 30.58,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_regression_to_mean": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "regression_to_the_mean",
+     "value_pred": 1.7,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "group_leakage",
+     "value_pred": 75.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_survivorship": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 51.65,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_feature_windows": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "target_leakage",
+     "value_pred": 8.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_cv_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.55,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage_xl": [
+    {
+     "parse_ok": false,
+     "flaw_pred": null,
+     "value_pred": null,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_survivorship_xl": [
+    {
+     "parse_ok": false,
+     "flaw_pred": null,
+     "value_pred": null,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_post_treatment": [
+    {
+     "parse_ok": false,
+     "flaw_pred": null,
+     "value_pred": null,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ]
+  },
+  "qwen2.5-7b_ollama-local": {
+   "simpson_2_strata": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": -16.88,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": -16.88,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": -16.88,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    }
+   ],
+   "simpson_4_strata": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": -4.31,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "simpsons_paradox",
+     "value_pred": -4.29,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "base_rate_fallacy",
+     "value_pred": -4.31,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "base_rate_double_positive": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "base_rate_fallacy",
+     "value_pred": 0.4,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "base_rate_fallacy",
+     "value_pred": 2.56,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "base_rate_fallacy",
+     "value_pred": 0.4,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "imbalanced_f1": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "imbalanced_accuracy",
+     "value_pred": 36.86,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "imbalanced_accuracy",
+     "value_pred": 36.75,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "imbalanced_accuracy",
+     "value_pred": 36.29,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "multiple_comparisons_bh": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "multiple_comparisons",
+     "value_pred": 3.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "multiple_comparisons",
+     "value_pred": 3.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "multiple_comparisons",
+     "value_pred": 3.0,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "test_set_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 81.13,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 71.88,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 71.9,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "preprocessing_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 43.0,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 42.97,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 41.07,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "target_leakage_timing": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 5.0,
+     "flaw_ok": false,
+     "value_ok": true,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 6.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 7.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "control_balanced_ab": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 1.06,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 1.06,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 1.06,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "control_legit_lagged_features": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 6.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": true,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 6.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": true,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 6.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": true,
+     "missed_flaw": false
+    }
+   ],
+   "hard_cohort_censoring": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 24.87,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 24.87,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 24.87,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    }
+   ],
+   "hard_regression_to_mean": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 13.3,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 13.3,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 13.3,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    }
+   ],
+   "hard_patient_leakage": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 90.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 90.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 90.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    }
+   ],
+   "hard_survivorship": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 53.8,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 42.25,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 61.5,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_feature_windows": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 10.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 11.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "preprocessing_leakage",
+     "value_pred": 11.0,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_cv_tuning": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 82.31,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": true,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.55,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "test_set_tuning",
+     "value_pred": 85.87,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": true,
+     "missed_flaw": false
+    }
+   ],
+   "hard_patient_leakage_xl": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.05,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.05,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 86.05,
+     "flaw_ok": false,
+     "value_ok": false,
+     "passed": false,
+     "score": 0,
+     "false_flag": false,
+     "missed_flaw": true
+    }
+   ],
+   "hard_survivorship_xl": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 39.5,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 37.81,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "survivorship_bias",
+     "value_pred": 56.4,
+     "flaw_ok": true,
+     "value_ok": false,
+     "passed": false,
+     "score": 50,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ],
+   "hard_control_post_treatment": [
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 10.28,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 10.28,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    },
+    {
+     "parse_ok": true,
+     "flaw_pred": "none",
+     "value_pred": 10.28,
+     "flaw_ok": true,
+     "value_ok": true,
+     "passed": true,
+     "score": 100,
+     "false_flag": false,
+     "missed_flaw": false
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,65 @@
+PASS  independent key matches: simpson_2_strata (3.05 vs 3.05)
+PASS  independent key matches: simpson_4_strata (5.65 vs 5.65)
+PASS  independent key matches: base_rate_double_positive (66.03 vs 66.03)
+PASS  independent key matches: imbalanced_f1 (44.72 vs 44.72)
+PASS  independent key matches: multiple_comparisons_bh (3 vs 3)
+PASS  independent key matches: test_set_tuning (86.75 vs 86.75)
+PASS  independent key matches: preprocessing_leakage (43.17 vs 43.17)
+PASS  independent key matches: target_leakage_timing (5 vs 5)
+PASS  independent key matches: control_balanced_ab (1.06 vs 1.06)
+PASS  independent key matches: control_legit_lagged_features (8 vs 8)
+PASS  independent key matches: hard_cohort_censoring (35.64 vs 35.64)
+PASS  independent key matches: hard_regression_to_mean (1.7 vs 1.7)
+PASS  independent key matches: hard_patient_leakage (75.0 vs 75.0)
+PASS  independent key matches: hard_survivorship (51.65 vs 51.65)
+PASS  independent key matches: hard_feature_windows (8 vs 8)
+PASS  hard control hard_control_cv_tuning: key equals the analyst's figure
+PASS  independent key matches: hard_patient_leakage_xl (55.56 vs 55.56)
+PASS  independent key matches: hard_survivorship_xl (44.95 vs 44.95)
+PASS  hard control hard_control_post_treatment: key equals the analyst's figure
+PASS  simpson_2_strata: B wins in every stratum but loses overall
+PASS  prompt contains no answer key leak: simpson_2_strata
+PASS  simpson_4_strata: B wins in every stratum but loses overall
+PASS  prompt contains no answer key leak: simpson_4_strata
+PASS  prompt contains no answer key leak: base_rate_double_positive
+PASS  prompt contains no answer key leak: imbalanced_f1
+PASS  BH count differs from naive and Bonferroni (a model must actually do BH)
+PASS  prompt contains no answer key leak: multiple_comparisons_bh
+PASS  best-by-test config differs from best-by-validation
+PASS  prompt contains no answer key leak: test_set_tuning
+PASS  prompt contains no answer key leak: preprocessing_leakage
+PASS  prompt contains no answer key leak: target_leakage_timing
+PASS  prompt contains no answer key leak: control_balanced_ab
+PASS  prompt contains no answer key leak: control_legit_lagged_features
+PASS  hard_cohort_censoring: exactly 8 mature cohorts and a partially-matured 9th
+PASS  prompt contains no answer key leak: hard_cohort_censoring
+PASS  prompt contains no answer key leak: hard_regression_to_mean
+PASS  hard_patient_leakage: some test patients also appear in train
+PASS  prompt contains no answer key leak: hard_patient_leakage
+PASS  prompt contains no answer key leak: hard_survivorship
+PASS  prompt contains no answer key leak: hard_feature_windows
+PASS  prompt contains no answer key leak: hard_control_cv_tuning
+PASS  prompt contains no answer key leak: hard_patient_leakage_xl
+PASS  prompt contains no answer key leak: hard_survivorship_xl
+PASS  post-treatment control: drug loses within both strata but wins pooled, and key = pooled diff
+PASS  prompt contains no answer key leak: hard_control_post_treatment
+PASS  oracle scores 100/100 on every task
+PASS  'always none, copy analyst figure' fails every flawed task
+PASS  'always none, copy analyst figure' passes every control
+PASS  right label + analyst's number gets 0 value points on flawed tasks
+PASS  right label + analyst's number scores exactly 50 on flawed tasks
+PASS  false alarm on a sound analysis is flagged and not a pass
+PASS  parser accepts: prose + fenced json
+PASS  parser accepts: flaw with spaces/caps
+PASS  parser accepts: value as string with %
+PASS  parser accepts: two objects: last wins
+PASS  parser accepts: braces in reasoning text
+PASS  fallback parser: invalid JSON with unambiguous fields is still graded (no false fail)
+PASS  fallback parser: prose mentioning a label without the JSON key is NOT graded
+PASS  garbage scores 0
+PASS  unknown label is not accepted
+PASS  value outside tolerance rejected
+PASS  value inside tolerance accepted
+PASS  count tasks need exact value
+
+All checks passed

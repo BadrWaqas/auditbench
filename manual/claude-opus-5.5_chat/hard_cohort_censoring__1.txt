@@ -1,0 +1,10 @@
+The analyst's 24.87% is skewed by right censoring. The export date is 2026-03-01, so a cohort qualifies only if its last signup is on or before 2026-01-30. The last four cohorts (ending 02-01, 02-08, 02-15 and 02-22) include users who hadn't reached day 30 yet. The dashboard counts those users as "not retained", which drags the figure down. The three Feb cohorts show zeros purely because of this, and the Jan 26 to Feb 1 cohort is only partly matured. The Christmas cohort's low signup count is harmless seasonality.
+
+Restricting to the 8 fully matured cohorts (Dec 1 to Jan 25):
+- Signups: 474 + 528 + 597 + 384 + 428 + 485 + 570 + 462 = 3928
+- Retained: 149 + 190 + 203 + 146 + 167 + 169 + 221 + 155 = 1400
+- Retention: 1400 / 3928 = **35.64%**
+
+Retention is stable at about 35%, not collapsing, so the emergency project isn't justified by this data.
+
+{"flaw": "right_censoring", "corrected_value": 35.64, "reasoning": "The last four cohorts had not all reached day 30 by the 2026-03-01 export, so users who couldn't yet be retained were counted as churned, dragging down the pooled rate and creating a fake collapse. Using only the 8 fully matured cohorts gives 1400/3928 = 35.64%."}

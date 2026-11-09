@@ -1,0 +1,11 @@
+The scans were split at random, not by patient, so most test scans come from patients the model already saw in training. That inflates the 86.05%. The high radiologist agreement is a harmless detail.
+
+**Patients with test scans only (none in training):**
+- P561: 4 scans, 3 correct
+- P831: 2 scans, 1 correct
+- P651: 2 scans, 0 correct
+- P886: 1 scan, 1 correct
+
+That gives 5 correct out of 9 scans, or **55.56%**. The other 34 test scans come from patients who also appear in training, and the model got 32 of those right. That gap is the leakage.
+
+{"flaw": "group_leakage", "corrected_value": 55.56, "reasoning": "Scans were split randomly instead of by patient, so 34 of 43 test scans belong to patients the model trained on. On the 9 scans from truly unseen patients, accuracy is 5/9 = 55.56%, which does not support claims of generalising to new patients."}

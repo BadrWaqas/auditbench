@@ -1,0 +1,12 @@
+Four features use data from after the 2026-01-31 cutoff, so the model can't see them at scoring time:
+
+- **balance_at_extract** is a snapshot from 2026-03-31, the end of the outcome window.
+- **support_calls_7d** ends 2026-02-01. That's only one day over, but the day falls inside the prediction window.
+- **collections_contact_flag** covers 2026-02-01 to 2026-03-31. Collections contact is close to a direct proxy for default.
+- **overdraft_days_30d** runs to 2026-02-15.
+
+That leaves 8 usable features: avg_balance_90d, app_logins_14d, max_balance_6m, card_spend_trend_q, salary_deposit_flag_60d, age_of_account_days, missed_payments_12m and txn_count_30d.
+
+The 0.97 AUC is inflated by post-cutoff information about the outcome, so it won't hold in production. The model needs retraining and re-evaluating on the 8 valid features before deployment.
+
+{"flaw": "target_leakage", "corrected_value": 8, "reasoning": "Four features (balance_at_extract, support_calls_7d, collections_contact_flag, overdraft_days_30d) use data recorded after the 2026-01-31 scoring cutoff, leaking outcome-window information and inflating the AUC. Only 8 of the 12 features are available at scoring time."}

@@ -1,0 +1,11 @@
+The analyst measured only the coached reps' before-and-after change. All 20 reps were picked for having the lowest Q1 deal counts, so they would tend to bounce back in Q2 even without coaching. The randomized waitlist is the right comparison group.
+
+**Change from Q1 to Q2:**
+- Coached reps: 20, 9, 8, 14, 7, 16, 16, 9, 16, 18. Sum 133, mean **13.3**
+- Waitlisted reps: 11, 15, 14, 6, 5, 17, 10, 10, 15, 13. Sum 116, mean **11.6**
+
+**Coaching effect:** 13.3 minus 11.6 = **1.7 deals per rep**
+
+Most of the 13.3-deal gain happened without coaching too. The real effect is about 1.7 deals, measured on just 10 reps per group, and the program was only tested on low performers. That doesn't support a confident rollout to all 80 reps. R137's late entry doesn't matter, since R137 isn't in the dataset and the number was verified anyway.
+
+{"flaw": "regression_to_the_mean", "corrected_value": 1.70, "reasoning": "Reps were selected for having the lowest Q1 counts, so they would improve in Q2 even without coaching, and the waitlisted reps did improve by 11.6 deals. Subtracting that from the coached reps' 13.3 leaves a coaching effect of only 1.7 deals per rep."}
